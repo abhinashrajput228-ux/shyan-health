@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Leadership - Shyan Health</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #1a4d3e;
+            --primary-light: #2d7a66;
+            --accent-gold: #d4a574;
+            --accent-warm: #e8b4a8;
+            --text-dark: #2c2c2c;
+            --text-light: #ffffff;
+            --bg-light: #f9f7f4;
+            --bg-warm: #faf5f0;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-warm) 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
+            color: var(--text-light);
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="15" fill="rgba(255,255,255,0.03)"/><circle cx="80" cy="80" r="20" fill="rgba(255,255,255,0.02)"/></svg>');
+            pointer-events: none;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            opacity: 0.95;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            z-index: 10;
+            padding: 8px 16px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: background 0.3s;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            color: var(--primary-dark);
+            margin-bottom: 60px;
+            position: relative;
+            font-weight: 600;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-warm));
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        /* CEO Grid */
+        .ceo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        /* CEO Card */
+        .ceo-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(26, 77, 62, 0.1);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .ceo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(26, 77, 62, 0.15);
+        }
+
+        .ceo-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            height: 400px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+        }
+
+        .ceo-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .ceo-info {
+            padding: 45px;
+        }
+
+        .ceo-title {
+            font-size: 1.1em;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .ceo-name {
+            font-size: 2em;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .ceo-description {
+            font-size: 0.95em;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .expertise {
+            margin-bottom: 25px;
+        }
+
+        .expertise-label {
+            font-size: 0.85em;
+            color: var(--primary-dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .expertise-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .expertise-tag {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-warm));
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        .highlight {
+            background: var(--bg-warm);
+            padding: 20px;
+            border-left: 4px solid var(--accent-gold);
+            border-radius: 4px;
+            font-size: 0.95em;
+            color: var(--text-dark);
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        /* Impact Section */
+        .impact-section {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+            color: white;
+            padding: 80px 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .impact-title {
+            font-size: 2em;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .impact-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .stat {
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            color: var(--accent-gold);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        /* Mission Section */
+        .mission-section {
+            padding: 60px 40px;
+            background: white;
+            border-radius: 12px;
+            margin-top: 60px;
+            box-shadow: 0 5px 20px rgba(26, 77, 62, 0.08);
+        }
+
+        .mission-title {
+            font-size: 1.8em;
+            color: var(--primary-dark);
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .mission-text {
+            font-size: 1.05em;
+            color: #555;
+            line-height: 1.9;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .section-title {
+                font-size: 1.8em;
+            }
+
+            .ceo-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .ceo-name {
+                font-size: 1.5em;
+            }
+
+            .ceo-info {
+                padding: 30px;
+            }
+
+            .impact-stats {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <a href="index.html" class="back-btn">← Back to Home</a>
+        <div class="header-content">
+            <h1>Our Leadership</h1>
+            <p>Transforming Health Through Ancient Wisdom</p>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- CEO Section -->
+        <section class="section">
+            <h2 class="section-title">Meet Our CEOs</h2>
+            
+            <div class="ceo-grid">
+                <!-- Riya Singh Card -->
+                <div class="ceo-card">
+                    <div class="ceo-image-wrapper">
+                        <img src="assets/images/riya-singh.png" alt="Riya Singh - CEO" class="ceo-image">
+                    </div>
+                    <div class="ceo-info">
+                        <div class="ceo-title">CEO & Co-Founder</div>
+                        <h3 class="ceo-name">Riya Singh</h3>
+                        <p class="ceo-description">
+                            A pioneering wellness expert specializing in Ayurvedic weight management and holistic health transformation. With over a decade of dedicated practice, Riya has revolutionized how women approach wellness through science-backed ancient wisdom.
+                        </p>
+
+                        <div class="expertise">
+                            <div class="expertise-label">Specialization</div>
+                            <div class="expertise-list">
+                                <span class="expertise-tag">Ayurvedic Medicine</span>
+                                <span class="expertise-tag">Weight Management</span>
+                                <span class="expertise-tag">Dosha Balancing</span>
+                                <span class="expertise-tag">Metabolic Health</span>
+                            </div>
+                        </div>
+
+                        <div class="highlight">
+                            <strong>300+</strong> women successfully transformed through her personalized wellness programs combining traditional Ayurvedic practices with modern nutrition science.
+                        </div>
+
+                        <div class="expertise" style="margin-top: 25px;">
+                            <div class="expertise-label">Key Expertise</div>
+                            <div class="expertise-list">
+                                <span class="expertise-tag">Herbal Remedies</span>
+                                <span class="expertise-tag">Personalized Diet Plans</span>
+                                <span class="expertise-tag">Detoxification</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Abhinash Singh Card -->
+                <div class="ceo-card">
+                    <div class="ceo-image-wrapper">
+                        <img src="assets/images/abhinash-singh.jfif" alt="Abhinash Singh - CEO" class="ceo-image">
+                    </div>
+                    <div class="ceo-info">
+                        <div class="ceo-title">CEO & Founder</div>
+                        <h3 class="ceo-name">Abhinash Singh</h3>
+                        <p class="ceo-description">
+                            A dynamic entrepreneur and growth strategist with proven expertise in scaling healthcare ventures. With a background in finance, investment analysis, and sales leadership, Abhinash drives Shyan Health's mission with strategic vision and operational excellence.
+                        </p>
+
+                        <div class="expertise">
+                            <div class="expertise-label">Experience</div>
+                            <div class="expertise-list">
+                                <span class="expertise-tag">Business Growth</span>
+                                <span class="expertise-tag">Sales Strategy</span>
+                                <span class="expertise-tag">Financial Planning</span>
+                                <span class="expertise-tag">Operations</span>
+                            </div>
+                        </div>
+
+                        <div class="highlight">
+                            <strong>Scaled multiple ventures</strong> with organizations like BYJU'S, Testbook, and 1West, building sustainable business models and market-leading products.
+                        </div>
+
+                        <div class="expertise" style="margin-top: 25px;">
+                            <div class="expertise-label">Specialization</div>
+                            <div class="expertise-list">
+                                <span class="expertise-tag">Strategic Planning</span>
+                                <span class="expertise-tag">Team Building</span>
+                                <span class="expertise-tag">Market Expansion</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Impact Section -->
+            <div class="impact-section">
+                <h3 class="impact-title">Our Impact & Vision</h3>
+                <div class="impact-stats">
+                    <div class="stat">
+                        <div class="stat-number">300+</div>
+                        <div class="stat-label">Women Transformed</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Natural Approaches</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label">Holistic Wellness</div>
+                    </div>
+                </div>
+                <p style="font-size: 1.1em; max-width: 700px; margin: 0 auto; line-height: 1.8;">
+                    Together, Riya and Abhinash are building Shyan Health into a global leader in Ayurvedic wellness, 
+                    combining time-tested traditions with modern business excellence to make transformative health 
+                    solutions accessible to everyone.
+                </p>
+            </div>
+
+            <!-- Mission Section -->
+            <div class="mission-section">
+                <h3 class="mission-title">Our Approach</h3>
+                <p class="mission-text">
+                    At Shyan Health, we believe true wellness comes from understanding your unique constitution through Ayurveda. 
+                    Our leadership combines Riya's deep wellness expertise with Abhinash's strategic business acumen to create sustainable, 
+                    personalized solutions. We focus on balancing body energies (doshas), boosting metabolic fire (Agni), and eliminating 
+                    toxins (Ama) through high-fiber vegetarian diets, warm spiced meals, and powerful herbs like Guggul and Triphala. 
+                    Our foundation: warm water rituals, consistent exercise, and mindful eating habits that create lasting transformations.
+                </p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
