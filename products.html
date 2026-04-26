@@ -584,6 +584,7 @@
       .main-container { grid-template-columns: 1fr; }
       .sidebar { display: none; }
     }
+    .badge-launching { background: #9E9E9E; color: white; }
   </style>
 </head>
 
@@ -775,10 +776,10 @@
       { id: 4, image: 'assets/images/turmeric-glow-capsules.png', emoji: '💛', name: 'Turmeric Glow Capsules', cat: 'Weight Management', desc: 'High-bioavailability turmeric with black pepper extract for inflammation, skin health, and immunity.', price: 1500, mrp: 1999, badge: 'new', rating: 4.8, reviews: 156, usage: 'Take 1 capsule daily after breakfast.' },
       { id: 5, image: 'assets/images/ashwagandha-plus.png', emoji: '🌙', name: 'Ashwagandha Plus', cat: 'Stress & Energy', desc: 'Premium Ashwagandha root extract to reduce stress, balance cortisol, and restore natural energy levels.', price: 1800, mrp: 2399, badge: 'best', rating: 4.9, reviews: 275, usage: 'Take 1 capsule twice daily with milk or water.' },
       { id: 6, image: 'assets/images/shatavari-womens-tonic.png', emoji: '🌺', name: 'Shatavari Women\'s Tonic', cat: 'Women\'s Health', desc: 'Traditional Shatavari formulation for hormonal harmony, reproductive health, and natural vitality.', price: 1600, mrp: 2199, badge: '', rating: 4.7, reviews: 134, usage: 'Take 1-2 tablets daily with warm milk.' },
-      { id: 7, image: null, emoji: '🍵', name: 'Metabolism Boost Tea', cat: 'Weight Management', desc: 'A delicious daily tea blend of green tea, ginger, and Ayurvedic herbs to naturally boost metabolism.', price: 800, mrp: 999, badge: 'sale', rating: 4.6, reviews: 98, usage: 'Drink 1-2 cups daily, ideally 30 mins after meals.' },
-      { id: 8, image: null, emoji: '💪', name: 'Women\'s Vitality Pack', cat: 'Women\'s Health', desc: 'Comprehensive 30-day wellness kit combining multiple supplements for total women\'s health transformation.', price: 4500, mrp: 6499, badge: 'best', rating: 4.9, reviews: 412, usage: 'Follow the routine mentioned in the guide inside.' },
-      { id: 9, image: null, emoji: '🌱', name: 'Moringa Daily Greens', cat: 'Digestive Health', desc: 'Organic Moringa powder — nature\'s multivitamin — packed with iron, calcium, and 92 nutrients.', price: 900, mrp: 1299, badge: 'new', rating: 4.7, reviews: 143, usage: 'Mix 1 scoop with water or juice every morning.' },
-      { id: 10, image: null, emoji: '🍯', name: 'Shilajit Resin Extract', cat: 'Stress & Energy', desc: 'Authentic Himalayan Shilajit resin for deep cellular energy, iron absorption, and hormonal balance.', price: 2200, mrp: 2999, badge: 'new', rating: 4.8, reviews: 167, usage: 'Take a pea-sized amount with warm milk daily.' }
+      { id: 7, image: null, emoji: '🍵', name: 'Metabolism Boost Tea', cat: 'Weight Management', desc: 'A delicious daily tea blend of green tea, ginger, and Ayurvedic herbs to naturally boost metabolism.', price: 800, mrp: 999, badge: 'launching', rating: 4.6, reviews: 98, usage: 'Drink 1-2 cups daily, ideally 30 mins after meals.' },
+      { id: 8, image: null, emoji: '💪', name: 'Women\'s Vitality Pack', cat: 'Women\'s Health', desc: 'Comprehensive 30-day wellness kit combining multiple supplements for total women\'s health transformation.', price: 4500, mrp: 6499, badge: 'launching', rating: 4.9, reviews: 412, usage: 'Follow the routine mentioned in the guide inside.' },
+      { id: 9, image: null, emoji: '🌱', name: 'Moringa Daily Greens', cat: 'Digestive Health', desc: 'Organic Moringa powder — nature\'s multivitamin — packed with iron, calcium, and 92 nutrients.', price: 900, mrp: 1299, badge: 'launching', rating: 4.7, reviews: 143, usage: 'Mix 1 scoop with water or juice every morning.' },
+      { id: 10, image: null, emoji: '🍯', name: 'Shilajit Resin Extract', cat: 'Stress & Energy', desc: 'Authentic Himalayan Shilajit resin for deep cellular energy, iron absorption, and hormonal balance.', price: 2200, mrp: 2999, badge: 'launching', rating: 4.8, reviews: 167, usage: 'Take a pea-sized amount with warm milk daily.' }
     ];
 
     let currentProduct = null;
@@ -789,7 +790,7 @@
       grid.innerHTML = filteredList.map(p => `
         <div class="product-card" onclick="openModal(${p.id})">
           <div class="product-card-img">
-            ${p.badge ? `<span class="product-badge badge-${p.badge}">${p.badge === 'best' ? 'Best Seller' : p.badge === 'new' ? 'New' : 'Sale'}</span>` : ''}
+            ${p.badge ? `<span class="product-badge badge-${p.badge}">${p.badge === 'best' ? 'Best Seller' : p.badge === 'new' ? 'New' : p.badge === 'launching' ? 'Launching Soon' : 'Sale'}</span>` : ''}
             ${p.image ? `<img src="${p.image}" alt="${p.name}">` : `<span style="font-size:80px">${p.emoji}</span>`}
             <div class="usage-popup">${p.usage}</div>
           </div>
@@ -802,7 +803,7 @@
             </div>
             <div class="product-footer">
               <div class="price-now">₹${p.price.toLocaleString()}</div>
-              <button class="btn-add-cart" onclick="event.stopPropagation(); addToCart(${p.id}, 1)">🛒</button>
+              ${p.badge === 'launching' ? '<span style="font-size:12px; color:var(--saffron); font-weight:bold;">Soon</span>' : `<button class="btn-add-cart" onclick="event.stopPropagation(); addToCart(${p.id}, 1)">🛒</button>`}
             </div>
           </div>
         </div>
@@ -817,6 +818,8 @@
       document.getElementById('modalDesc').textContent = p.desc;
       document.getElementById('modalPrice').textContent = `₹${p.price.toLocaleString()}`;
       document.getElementById('qtyVal').textContent = '1';
+      document.getElementById('modalAddBtn').style.display = p.badge === 'launching' ? 'none' : 'block';
+      document.getElementById('modalWaBtn').style.display = p.badge === 'launching' ? 'none' : 'block';
       document.getElementById('productModal').classList.add('active');
       document.body.style.overflow = 'hidden';
     }
