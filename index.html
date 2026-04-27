@@ -376,42 +376,49 @@
     /* ─── HERO ─── */
     .hero {
       position: relative;
-      min-height: 88vh;
+      min-height: 90vh;
       display: flex;
       align-items: center;
       overflow: hidden;
-      background: #1A3D2B;
+      background: #0F2A1C;
     }
 
-    .hero-video-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      overflow: hidden;
-    }
-
-    .hero-video-container::after {
-      content: '';
+    .hero-video-carousel {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5));
+      z-index: 1;
+    }
+
+    .hero-video-item {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+      z-index: 1;
+    }
+
+    .hero-video-item.active {
+      opacity: 1;
       z-index: 2;
     }
 
-    .hero-video {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      min-width: 100%;
-      min-height: 100%;
-      width: auto;
-      height: auto;
-      z-index: 1;
-      transform: translate(-50%, -50%);
+    @keyframes zoomEffect { from { transform: scale(1); } to { transform: scale(1.1); } }
+
+    .hero-video-item.active video {
+      animation: zoomEffect 8s linear infinite alternate;
+    }
+
+    .hero-video-item video {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
+    }
+
+    .hero-video-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+      z-index: 3;
     }
 
     .hero-bg-pattern {
@@ -3030,14 +3037,23 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-video-container">
-      <video autoplay muted loop playsinline class="hero-video">
-        <source src="assets/videos/hero-background.mp4" type="video/mp4">
-      </video>
+    <div class="hero-video-carousel">
+      <div class="hero-video-item active">
+        <video autoplay muted loop playsinline><source src="assets/videos/hero-1.mp4" type="video/mp4"></video>
+      </div>
+      <div class="hero-video-item">
+        <video muted loop playsinline><source src="assets/videos/hero-2.mp4" type="video/mp4"></video>
+      </div>
+      <div class="hero-video-item">
+        <video muted loop playsinline><source src="assets/videos/hero-3.mp4" type="video/mp4"></video>
+      </div>
+      <div class="hero-video-item">
+        <video muted loop playsinline><source src="assets/videos/hero-4.mp4" type="video/mp4"></video>
+      </div>
+      <div class="hero-video-overlay"></div>
     </div>
-    <div class="hero-bg-pattern" style="z-index: 3;"></div>
-    <div class="hero-leaf"></div>
-    <div class="hero-inner">
+    <div class="hero-bg-pattern" style="z-index: 4;"></div>
+    <div class="hero-inner" style="z-index: 10;">
       <div class="hero-content">
         <div class="hero-badge">🍃 Ayurvedic Wellness Programme</div>
         <h1>Natural Ayurvedic Weight Loss for Indian Women | Fat to Fit Journey</h1>
@@ -3066,34 +3082,7 @@
           </div>
         </div>
       </div>
-      <div class="hero-visual">
-        <div class="hero-visual-3d">
-          <div class="hero-3d-floating-element" style="top: -10%; left: -20%;"></div>
-          <div class="hero-3d-floating-element"
-            style="bottom: -10%; right: -20%; background: rgba(107, 143, 113, 0.15);"></div>
-
-          <div class="hero-3d-stack">
-            <!-- Back Card -->
-            <div class="stack-card card-back">
-              <img src="assets/images/hero-journey.png"
-                alt="Indian woman's natural Ayurvedic weight loss journey – Shyan Health" loading="lazy">
-            </div>
-
-            <!-- Middle Card -->
-            <div class="stack-card card-mid">
-              <img src="assets/images/natural-ingredients.png"
-                alt="Natural Ayurvedic herbs – ashwagandha, shatavari, triphala by Shyan Health" loading="lazy">
-            </div>
-
-            <!-- Front Card -->
-            <div class="stack-card card-front">
-              <img src="assets/images/fat-to-fit-tablets.png"
-                alt="Fat to Fit Tablets – Natural Ayurvedic Weight Loss Supplements for Women" loading="lazy">
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
   </section>
 
   <!-- MARQUEE -->
@@ -4619,6 +4608,29 @@
     // Auto-show after 4 seconds
     window.addEventListener('load', () => {
       setTimeout(showLeadPopup, 4000);
+    });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const videos = document.querySelectorAll('.hero-video-item');
+      let currentVideo = 0;
+
+      function nextVideo() {
+        videos[currentVideo].classList.remove('active');
+        // Pause current if needed (though muted/loop usually fine)
+        const currentVidEl = videos[currentVideo].querySelector('video');
+        
+        currentVideo = (currentVideo + 1) % videos.length;
+        
+        videos[currentVideo].classList.add('active');
+        const nextVidEl = videos[currentVideo].querySelector('video');
+        nextVidEl.play().catch(() => {}); // Ensure it plays
+      }
+
+      // Initial play for all to warm up? Or just the first one.
+      // Better to cycle every 6 seconds
+      setInterval(nextVideo, 6000);
     });
   </script>
 </body>
