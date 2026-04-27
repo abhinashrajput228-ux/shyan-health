@@ -430,10 +430,7 @@
       z-index: 10; max-width: 1300px;
       margin: 0 auto;
       padding: 120px 30px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center;
     }
 
     .hero-badge {
@@ -573,156 +570,7 @@
       width: 100%;
     }
 
-    .hero-3d-stack {
-      position: relative;
-      width: 320px;
-      height: 480px;
-      transform-style: preserve-3d;
-      transition: all 0.8s ease;
-    }
-
-    .hero-3d-stack:hover {
-      gap: 100px;
-    }
-
-    .stack-card {
-      position: absolute;
-      width: 320px;
-      height: 480px;
-      border-radius: 30px;
-      overflow: hidden;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-      transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .stack-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* Automatic Cycling Animation */
-    @keyframes cycle1 {
-
-      0%,
-      100% {
-        transform: translateZ(120px) translateX(80px) rotateY(25deg);
-        z-index: 3;
-        opacity: 1;
-      }
-
-      33% {
-        transform: translateZ(-120px) translateX(-80px) rotateY(-25deg);
-        z-index: 1;
-        opacity: 0.5;
-      }
-
-      66% {
-        transform: translateZ(0px) rotateY(0deg);
-        z-index: 2;
-        opacity: 0.8;
-      }
-    }
-
-    @keyframes cycle2 {
-
-      0%,
-      100% {
-        transform: translateZ(0px) rotateY(0deg);
-        z-index: 2;
-        opacity: 0.8;
-      }
-
-      33% {
-        transform: translateZ(120px) translateX(80px) rotateY(25deg);
-        z-index: 3;
-        opacity: 1;
-      }
-
-      66% {
-        transform: translateZ(-120px) translateX(-80px) rotateY(-25deg);
-        z-index: 1;
-        opacity: 0.5;
-      }
-    }
-
-    @keyframes cycle3 {
-
-      0%,
-      100% {
-        transform: translateZ(-120px) translateX(-80px) rotateY(-25deg);
-        z-index: 1;
-        opacity: 0.5;
-      }
-
-      33% {
-        transform: translateZ(0px) rotateY(0deg);
-        z-index: 2;
-        opacity: 0.8;
-      }
-
-      66% {
-        transform: translateZ(120px) translateX(80px) rotateY(25deg);
-        z-index: 3;
-        opacity: 1;
-      }
-    }
-
-    .card-front {
-      animation: cycle1 12s infinite;
-    }
-
-    .card-mid {
-      animation: cycle2 12s infinite;
-    }
-
-    .card-back {
-      animation: cycle3 12s infinite;
-    }
-
-    /* Hover Fan-out */
-    .hero-visual-3d:hover .card-front {
-      transform: translateZ(150px) translateX(220px) rotateY(15deg);
-      animation-play-state: paused;
-      opacity: 1;
-      z-index: 10;
-    }
-
-    .hero-visual-3d:hover .card-mid {
-      transform: translateZ(50px) translateX(0) rotateY(0deg);
-      animation-play-state: paused;
-      opacity: 1;
-      z-index: 5;
-    }
-
-    .hero-visual-3d:hover .card-back {
-      transform: translateZ(150px) translateX(-220px) rotateY(-15deg);
-      animation-play-state: paused;
-      opacity: 1;
-      z-index: 10;
-    }
-
-    .hero-3d-floating-element {
-      position: absolute;
-      width: 180px;
-      height: 180px;
-      background: rgba(232, 168, 32, 0.2);
-      border-radius: 50%;
-      filter: blur(60px);
-      z-index: -1;
-      animation: auraFloat 12s ease-in-out infinite;
-    }
-
-    @keyframes auraFloat {
-
-      0%,
-      100% {
-        transform: scale(1) translate(0, 0);
-        opacity: 0.3;
-      }
+    
 
       50% {
         transform: scale(1.3) translate(60px, -60px);
@@ -2977,7 +2825,84 @@
         height: 200px !important;
       }
     }
-  </style>
+  
+    .hero-3d-stack {
+      position: relative;
+      width: 320px;
+      height: 480px;
+      transform-style: preserve-3d;
+      margin: 0 auto;
+    }
+
+    .stack-card {
+      position: absolute;
+      inset: 0;
+      border-radius: 30px;
+      overflow: hidden;
+      background: white;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+      transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid var(--border);
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .stack-card img, .stack-card video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .stack-card.active-front {
+      opacity: 1;
+      visibility: visible;
+      transform: translateZ(100px) rotateY(0deg) translateX(0);
+      z-index: 10;
+    }
+
+    .stack-card.active-mid {
+      opacity: 0.8;
+      visibility: visible;
+      transform: translateZ(0px) rotateY(15deg) translateX(80px);
+      z-index: 5;
+    }
+
+    .stack-card.active-back {
+      opacity: 0.6;
+      visibility: visible;
+      transform: translateZ(-100px) rotateY(-15deg) translateX(-80px);
+      z-index: 1;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        padding: 40px 0;
+        min-height: auto;
+      }
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+      }
+      .hero-visual {
+        order: -1;
+        height: 400px;
+        display: flex;
+        justify-content: center;
+      }
+      .hero-3d-stack {
+        width: 240px;
+        height: 360px;
+      }
+      .stack-card.active-mid {
+        transform: translateZ(0px) rotateY(10deg) translateX(40px);
+      }
+      .stack-card.active-back {
+        transform: translateZ(-50px) rotateY(-10deg) translateX(-40px);
+      }
+    }
+
+</style>
 
 
 
@@ -3058,23 +2983,35 @@
           <div class="hero-3d-floating-element" style="top: -10%; left: -20%;"></div>
           <div class="hero-3d-floating-element" style="bottom: -10%; right: -20%; background: rgba(107, 143, 113, 0.15);"></div>
 
-          <div class="hero-3d-stack">
-            <!-- Back Card -->
-            <div class="stack-card card-back">
-              <video autoplay muted loop playsinline><source src="assets/videos/hero-3.mp4" type="video/mp4"></video>
+          <div class="hero-3d-stack" id="heroGallery">
+            <!-- 8 Dynamic Items (3 Videos, 5 Photos) -->
+            <div class="stack-card" data-index="0">
+              <video autoplay muted loop playsinline><source src="assets/videos/hero-1.mp4" type="video/mp4"></video>
             </div>
-
-            <!-- Middle Card -->
-            <div class="stack-card card-mid">
+            <div class="stack-card" data-index="1">
               <video autoplay muted loop playsinline><source src="assets/videos/hero-2.mp4" type="video/mp4"></video>
             </div>
-
-            <!-- Front Card -->
-            <div class="stack-card card-front">
-              <video autoplay muted loop playsinline><source src="assets/videos/hero-1.mp4" type="video/mp4"></video>
+            <div class="stack-card" data-index="2">
+              <video autoplay muted loop playsinline><source src="assets/videos/hero-3.mp4" type="video/mp4"></video>
+            </div>
+            <div class="stack-card" data-index="3">
+              <img src="assets/images/hero-card-1.png" alt="Fat to Fit Tablets" loading="lazy">
+            </div>
+            <div class="stack-card" data-index="4">
+              <img src="assets/images/hero-card-2.png" alt="Ayurvedic Wellness" loading="lazy">
+            </div>
+            <div class="stack-card" data-index="5">
+              <img src="assets/images/hero-card-3.png" alt="PCOS Balance Kit" loading="lazy">
+            </div>
+            <div class="stack-card" data-index="6">
+              <img src="assets/images/hero-card-4.png" alt="PCOS Support" loading="lazy">
+            </div>
+            <div class="stack-card" data-index="7">
+              <img src="assets/images/hero-card-5.png" alt="Natural Weight Loss" loading="lazy">
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </section>
@@ -4606,6 +4543,32 @@
   </script>
 
   
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = document.querySelectorAll('#heroGallery .stack-card');
+      let currentIndex = 0;
+
+      function updateGallery() {
+        cards.forEach(card => {
+          card.classList.remove('active-front', 'active-mid', 'active-back');
+        });
+
+        const front = currentIndex;
+        const mid = (currentIndex + 1) % cards.length;
+        const back = (currentIndex + 2) % cards.length;
+
+        cards[front].classList.add('active-front');
+        cards[mid].classList.add('active-mid');
+        cards[back].classList.add('active-back');
+
+        currentIndex = (currentIndex + 1) % cards.length;
+      }
+
+      updateGallery();
+      setInterval(updateGallery, 4000);
+    });
+  </script>
 </body>
 
 
