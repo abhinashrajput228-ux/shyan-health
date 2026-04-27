@@ -2554,7 +2554,141 @@
       }
     }
     .badge-launching { background: #9E9E9E; color: white; }
+
+    /* Lead Capture Popup */
+    .lead-popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .lead-popup-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lead-popup-content {
+      background: var(--warm-white);
+      width: 100%;
+      max-width: 420px;
+      padding: 40px;
+      border-radius: 24px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border);
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.4s ease;
+    }
+
+    .lead-popup-overlay.active .lead-popup-content {
+      transform: translateY(0);
+    }
+
+    .lead-popup-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .lead-popup-header h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--deep-green);
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    .lead-popup-header p {
+      color: var(--text-mid);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .lead-popup-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .lead-form-group input, 
+    .lead-form-group select,
+    .lead-form-row input {
+      width: 100%;
+      padding: 12px 18px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.3s;
+      background: white;
+    }
+
+    .lead-form-group input:focus, 
+    .lead-form-row input:focus {
+      border-color: var(--saffron);
+    }
+
+    .lead-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .lead-success-msg {
+      display: none;
+      text-align: center;
+      color: var(--deep-green);
+      font-weight: 600;
+      font-size: 16px;
+      padding: 20px;
+      background: rgba(26, 61, 43, 0.05);
+      border-radius: 12px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 480px) {
+      .lead-popup-content {
+        padding: 30px 20px;
+      }
+      .lead-popup-header h2 {
+        font-size: 22px;
+      }
+    }
+
+    .lead-close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #ff4d4d;
+      color: white;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: bold;
+      transition: all 0.3s;
+      box-shadow: 0 4px 10px rgba(255, 77, 77, 0.3);
+      z-index: 10;
+    }
+
+    .lead-close-btn:hover {
+      background: #ff1a1a;
+      transform: scale(1.1);
+    }
   </style>
+
 </head>
 
 <body>
@@ -2701,6 +2835,41 @@
         <div class="trust-icon">🛡️</div>
         <div class="trust-title">Safe & Certified</div>
         <div class="trust-text">Quality-tested, safe for long-term daily use</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT US SECTION -->
+  <section class="section about-section" id="about" style="background: var(--warm-white);">
+    <div class="section-inner">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+        <div class="about-visual" style="position: relative;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div style="background: var(--cream); border-radius: 20px; overflow: hidden; height: 300px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transform: translateY(30px); transition: transform 0.3s ease;">
+              <img src="assets/images/riya-singh.png" alt="Riya Singh" style="width: 100%; height: 100%; object-fit: cover; object-position: center 15%; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            </div>
+            <div style="background: var(--cream); border-radius: 20px; overflow: hidden; height: 300px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease;">
+              <img src="assets/images/abhinash-singh.jfif" alt="Abhinash Singh" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            </div>
+          </div>
+          <div style="position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); background: var(--deep-green); color: white; padding: 15px 30px; border-radius: 50px; font-weight: 700; white-space: nowrap; box-shadow: 0 10px 25px rgba(26, 61, 43, 0.3);">
+            Meet Our Founders 🌿
+          </div>
+        </div>
+        <div class="about-content">
+          <div class="section-tag">About Shyan Health</div>
+          <h2 class="section-title" style="text-align: left; margin-bottom: 25px;">Our Mission is Your <br><em style="color:var(--saffron)">Natural Transformation</em></h2>
+          <p style="font-size: 1.1em; color: var(--text-mid); margin-bottom: 25px; line-height: 1.8;">
+            Shyan Health was born out of a simple vision: to make the transformative power of Ayurveda accessible, scientific, and sustainable for the modern Indian woman. 
+          </p>
+          <p style="font-size: 1em; color: var(--text-light); margin-bottom: 30px; line-height: 1.7;">
+            Founded by <strong>Riya Singh</strong> and <strong>Abhinash Singh</strong>, we combine deep wellness expertise with strategic growth to build a community where health isn't just a goal, but a way of life.
+          </p>
+          <div style="display: flex; gap: 20px;">
+            <a href="about.html" class="btn-primary">Learn Our Story</a>
+            <a href="#contact" class="btn-ghost">Get in Touch</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -2957,11 +3126,11 @@
         <div class="blog-buttons">
           <button class="blog-btn active" data-article="keto">Keto Diet</button>
           <button class="blog-btn" data-article="if">Intermittent Fasting</button>
-          <button class="blog-btn" data-article="carnivore">Carnivore Diet</button>
           <button class="blog-btn" data-article="mediterranean">Mediterranean</button>
           <button class="blog-btn" data-article="lowcarb">Low-Carb</button>
           <button class="blog-btn" data-article="fodmap">FODMAP</button>
           <button class="blog-btn" data-article="vegan">Vegan</button>
+          <button class="blog-btn" data-article="ayurvedic">Ayurvedic Diet</button>
         </div>
       </div>
 
@@ -2977,7 +3146,6 @@
             <h3>Table of Contents</h3>
             <ul>
               <li><a href="#keto-what">What is Keto?</a></li>
-              <li><a href="#keto-how">How it Works</a></li>
               <li><a href="#keto-benefits">Benefits</a></li>
               <li><a href="#keto-foods">Foods Guide</a></li>
             </ul>
@@ -2985,7 +3153,7 @@
           <h2 id="keto-what">What is the Keto Diet?</h2>
           <p>The ketogenic diet is a low-carbohydrate, high-fat eating plan that shifts your body into ketosis. Standard
             distribution is 75% fat, 20% protein, and 5% carbs.</p>
-          <div class="benefit-grid">
+          <div class="benefit-grid" id="keto-benefits">
             <div class="benefit-card">
               <h4>🔥 Rapid Weight Loss</h4>
               <p>Appetite suppression and fat burning lead to significant results.</p>
@@ -2995,30 +3163,30 @@
               <p>Ketones provide stable energy, potentially improving mental clarity.</p>
             </div>
           </div>
-          <h2 id="keto-foods">Foods to Eat & Avoid</h2>
+          <h2 id="keto-foods">Vegetarian Keto Foods</h2>
           <table class="diet-table">
             <tr>
               <th>Category</th>
               <th>Foods to Enjoy</th>
             </tr>
             <tr>
-              <td>Fats</td>
-              <td>Olive oil, Coconut oil, Butter, Avocado</td>
+              <td>Healthy Fats</td>
+              <td>Ghee, Olive oil, Coconut oil, Avocado</td>
             </tr>
             <tr>
-              <td>Proteins</td>
-              <td>Beef, Pork, Fish, Eggs, Chicken</td>
+              <td>Veg Proteins</td>
+              <td>Paneer, Tofu, Hemp seeds, Almonds, Greek Yogurt</td>
             </tr>
             <tr>
-              <td>Veg</td>
-              <td>Spinach, Broccoli, Cauliflower, Zucchini</td>
+              <td>Low-Carb Veg</td>
+              <td>Spinach, Broccoli, Cauliflower, Bell Peppers</td>
             </tr>
           </table>
           <div class="meal-plan-box">
-            <h4>7-Day Keto Sample</h4>
+            <h4>7-Day Vegetarian Keto Sample</h4>
             <div class="meal-day">
               <h4>Monday</h4>
-              <p>B: Scrambled eggs with cheese | L: Grilled chicken with olive oil | D: Salmon with lemon butter</p>
+              <p>B: Paneer scramble with spinach | L: Zucchini noodles with pesto and walnuts | D: Cauliflower rice with grilled tofu</p>
             </div>
           </div>
         </div>
@@ -3050,29 +3218,33 @@
         </div>
       </article>
 
-      <!-- CARNIVORE -->
-      <article id="carnivore" class="article-section">
+      <!-- AYURVEDIC DIET -->
+      <article id="ayurvedic" class="article-section">
         <div class="article-header">
-          <h2>The Carnivore Diet Explained</h2>
-          <p>The ultimate elimination diet: Animal products only</p>
+          <h2>The Ayurvedic Sattvic Diet</h2>
+          <p>Nourishing the Body, Mind, and Soul with Pure Foods</p>
         </div>
         <div class="blog-content">
-          <h2>What to Eat</h2>
-          <p>Consists entirely of meat, fish, eggs, and optionally dairy. Removes all plant foods entirely.</p>
+          <h2>Sattvic Principles</h2>
+          <p>The Ayurvedic diet focuses on fresh, whole, and plant-based foods that promote harmony and vitality (Ojas).</p>
           <table class="diet-table">
             <tr>
-              <th>Included</th>
-              <th>Avoid (Everything Else)</th>
+              <th>Included (Sattvic)</th>
+              <th>Avoid (Rajasic/Tamasic)</th>
             </tr>
             <tr>
-              <td>Steak, Ribs, Bacon, Liver</td>
-              <td>Grains, Fruits, Veg, Nuts</td>
+              <td>Fresh Fruits, Honey, Ghee, Spiced Veg</td>
+              <td>Meat, Onion, Garlic, Stale Food</td>
             </tr>
             <tr>
-              <td>Salmon, Sardines, Eggs</td>
-              <td>Oils, Condiments, Legumes</td>
+              <td>Moong Dal, Rice, Cow Milk, Almonds</td>
+              <td>Alcohol, Excessive Chili, Coffee</td>
             </tr>
           </table>
+          <div class="meal-plan-box">
+            <h4>Daily Sattvic Routine</h4>
+            <p>Start with warm lemon water, followed by fresh fruit or porridge for breakfast, and a balanced Khichdi for lunch.</p>
+          </div>
         </div>
       </article>
 
@@ -3094,7 +3266,7 @@
               <p>Associated with longer lifespan and healthier aging.</p>
             </div>
           </div>
-          <p>Focuses on whole grains, olive oil, fish, and lots of seasonal produce.</p>
+          <p>Focuses on whole grains, olive oil, legumes, and lots of seasonal produce.</p>
         </div>
       </article>
 
@@ -3895,7 +4067,167 @@
     renderProducts();
   </script>
   <div class="scroll-progress"></div>
+
+  <!-- Lead Capture Popup -->
+  <div id="leadPopup" class="lead-popup-overlay">
+    <div class="lead-popup-content">
+      <button class="lead-close-btn" onclick="closeLeadPopup()">×</button>
+      <div class="lead-popup-header">
+        <h2>Free Weight Loss Consultation</h2>
+        <p>100% natural Ayurvedic program with expert guidance</p>
+      </div>
+      <form id="leadForm" class="lead-popup-form">
+        <div class="lead-form-group">
+          <input type="text" id="leadName" placeholder="Full Name *" required oninput="stopAutoClose()">
+        </div>
+        <div class="lead-form-group">
+          <input type="tel" id="leadPhone" placeholder="Phone Number *" required oninput="stopAutoClose()">
+        </div>
+        <div class="lead-form-row">
+          <input type="number" id="leadAge" placeholder="Age" oninput="stopAutoClose()">
+          <input type="number" id="leadWeight" placeholder="Weight (kg)" oninput="stopAutoClose()">
+        </div>
+        <div class="lead-form-group">
+          <select id="leadGoal" oninput="stopAutoClose()">
+            <option value="Weight Loss">Weight Loss</option>
+            <option value="PCOS">PCOS</option>
+            <option value="PCOD">PCOD</option>
+            <option value="Wellness">Wellness</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%">Get Free Consultation</button>
+      </form>
+      <div id="leadSuccess" class="lead-success-msg">
+        Our expert will contact you within 24 hours
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // LEAD CAPTURE POPUP LOGIC
+    let autoCloseTimer;
+    let popupShown = false;
+
+    function showLeadPopup() {
+      if (popupShown) return;
+      const popup = document.getElementById('leadPopup');
+      if (!popup) return;
+      popup.classList.add('active');
+      popupShown = true;
+      console.log('Popup View Tracked'); // Track popup view
+
+      // Start 60s auto-close timer if user is idle
+      autoCloseTimer = setTimeout(() => {
+        closeLeadPopup();
+      }, 60000);
+    }
+
+    function closeLeadPopup() {
+      const popup = document.getElementById('leadPopup');
+      if (popup) popup.classList.remove('active');
+    }
+
+    function stopAutoClose() {
+      if (autoCloseTimer) {
+        clearTimeout(autoCloseTimer);
+        autoCloseTimer = null;
+        console.log('Auto-close disabled due to user interaction');
+      }
+    }
+
+    const leadForm = document.getElementById('leadForm');
+    if (leadForm) {
+      leadForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        stopAutoClose();
+
+        const submitBtn = this.querySelector('button');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+
+        const name = document.getElementById('leadName').value;
+        const phone = document.getElementById('leadPhone').value;
+        const age = document.getElementById('leadAge').value;
+        const weight = document.getElementById('leadWeight').value;
+        const goal = document.getElementById('leadGoal').value;
+
+        // 1. Submit to Google Form (Reliable Hidden Iframe Method)
+        const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSf3hbZGiIDzuLh6ymfVrKWQ2fN6iVr840dQLSvw4_rLuFlItg/formResponse";
+        
+        // Create a hidden form and iframe for submission (bypasses CORS)
+        let iframe = document.getElementById('gform_mirror');
+        if (!iframe) {
+          iframe = document.createElement('iframe');
+          iframe.id = 'gform_mirror';
+          iframe.name = 'gform_mirror';
+          iframe.style.display = 'none';
+          document.body.appendChild(iframe);
+        }
+
+        const gForm = document.createElement('form');
+        gForm.action = googleFormUrl;
+        gForm.method = 'POST';
+        gForm.target = 'gform_mirror';
+        gForm.style.display = 'none';
+
+        const fields = {
+          'entry.213742848': name,
+          'entry.2084893667': phone,
+          'entry.33494358': age,
+          'entry.1344891303': weight,
+          'entry.1570290343': goal
+        };
+
+        for (const [key, val] of Object.entries(fields)) {
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = key;
+          input.value = val;
+          gForm.appendChild(input);
+        }
+
+        document.body.appendChild(gForm);
+        gForm.submit();
+        setTimeout(() => { document.body.removeChild(gForm); }, 1000);
+
+        try {
+          // 2. Also send to our backend (for backup/tracking)
+          fetch('/api/leads', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, phone, age, weight, goal, source: 'homepage_popup' })
+          });
+
+          console.log('Lead Submission Tracked'); 
+          this.style.display = 'none';
+          document.getElementById('leadSuccess').style.display = 'block';
+          
+          // 3. Optional: WhatsApp Redirect
+          const waMsg = encodeURIComponent(`Hi Shyan Health! I'm interested in a free consultation.\n\n👤 Name: ${name}\n📞 Phone: ${phone}\n🔢 Age: ${age}\n⚖️ Weight: ${weight}kg\n🎯 Goal: ${goal}`);
+          const waUrl = `https://wa.me/918802916080?text=${waMsg}`;
+          
+          // Open WhatsApp after a brief delay so they see the success message
+          setTimeout(() => {
+            window.open(waUrl, '_blank');
+            closeLeadPopup();
+          }, 1500);
+
+        } catch (error) {
+          console.error('Error:', error);
+          alert('Server error. Please try again later.');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Get Free Consultation';
+        }
+      });
+    }
+
+    // Auto-show after 4 seconds
+    window.addEventListener('load', () => {
+      setTimeout(showLeadPopup, 4000);
+    });
+  </script>
 </body>
+
 
 </html>
  

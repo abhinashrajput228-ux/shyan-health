@@ -30,6 +30,7 @@ app.use('/api/cart', require('./routes/cartRoutes'));
 app.use('/api/orders', require('./routes/orderRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
 app.use('/api/contact', require('./routes/contactRoutes'));
+app.use('/api/leads', require('./routes/leadRoutes'));
 app.use('/api/upload', require('./routes/uploadRoutes')); // Photo upload → Cloudinary
 
 // Root Route

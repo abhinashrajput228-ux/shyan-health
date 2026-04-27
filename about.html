@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Leadership - Shyan Health</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,28 +13,35 @@
         }
 
         :root {
-            --primary-dark: #1a4d3e;
-            --primary-light: #2d7a66;
-            --accent-gold: #d4a574;
-            --accent-warm: #e8b4a8;
-            --text-dark: #2c2c2c;
-            --text-light: #ffffff;
-            --bg-light: #f9f7f4;
-            --bg-warm: #faf5f0;
+            --saffron: #E8A820;
+            --turmeric: #D4891A;
+            --deep-green: #1A3D2B;
+            --forest: #2D5A3D;
+            --sage: #6B8F71;
+            --cream: #FDF6E9;
+            --warm-white: #FEFAF3;
+            --text-dark: #1C1810;
+            --text-mid: #4A3728;
+            --text-light: #7A6555;
+            --border: #E8DCC8;
         }
 
         body {
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-warm) 100%);
+            font-family: 'DM Sans', sans-serif;
+            background: var(--warm-white);
             color: var(--text-dark);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
         /* Header Section */
         .header {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
-            color: var(--text-light);
+            background: linear-gradient(135deg, var(--deep-green) 0%, var(--forest) 100%);
+            color: white;
             padding: 80px 40px;
             text-align: center;
             position: relative;
@@ -62,13 +70,15 @@
             margin-bottom: 15px;
             font-weight: 700;
             letter-spacing: -1px;
+            color: var(--saffron);
         }
 
         .header p {
             font-size: 1.3em;
-            font-weight: 300;
+            font-weight: 400;
             letter-spacing: 1px;
             opacity: 0.95;
+            font-family: 'DM Sans', sans-serif;
         }
 
         .back-btn {
@@ -77,7 +87,7 @@
             left: 20px;
             color: white;
             text-decoration: none;
-            font-family: Arial, sans-serif;
+            font-family: 'DM Sans', sans-serif;
             font-size: 14px;
             font-weight: bold;
             display: flex;
@@ -109,7 +119,7 @@
         .section-title {
             text-align: center;
             font-size: 2.5em;
-            color: var(--primary-dark);
+            color: var(--deep-green);
             margin-bottom: 60px;
             position: relative;
             font-weight: 600;
@@ -120,7 +130,7 @@
             display: block;
             width: 80px;
             height: 4px;
-            background: linear-gradient(90deg, var(--accent-gold), var(--accent-warm));
+            background: linear-gradient(90deg, var(--saffron), var(--turmeric));
             margin: 20px auto 0;
             border-radius: 2px;
         }
@@ -136,35 +146,41 @@
         /* CEO Card */
         .ceo-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(26, 77, 62, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             animation: fadeInUp 0.8s ease-out;
+            border: 1px solid var(--border);
         }
 
         .ceo-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(26, 77, 62, 0.15);
+            box-shadow: 0 20px 60px rgba(26, 61, 43, 0.1);
         }
 
         .ceo-image-wrapper {
             position: relative;
             overflow: hidden;
-            height: 400px;
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+            height: 450px;
+            background: var(--cream);
         }
 
         .ceo-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2em;
-            color: rgba(255, 255, 255, 0.7);
+            transition: transform 0.6s ease;
+        }
+
+        /* Animation and Fix for Riya Photo */
+        .ceo-card:hover .ceo-image {
+            transform: scale(1.05);
+        }
+
+        .riya-photo {
+            object-position: center 15%; /* Fix for Riya's photo focus */
         }
 
         .ceo-info {
@@ -173,24 +189,24 @@
 
         .ceo-title {
             font-size: 1.1em;
-            color: var(--accent-gold);
+            color: var(--turmeric);
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 12px;
-            font-weight: 600;
-            font-family: 'Arial', sans-serif;
+            font-weight: 700;
+            font-family: 'DM Sans', sans-serif;
         }
 
         .ceo-name {
-            font-size: 2em;
-            color: var(--primary-dark);
+            font-size: 2.2em;
+            color: var(--deep-green);
             margin-bottom: 20px;
             font-weight: 700;
         }
 
         .ceo-description {
-            font-size: 0.95em;
-            color: #555;
+            font-size: 1em;
+            color: var(--text-mid);
             line-height: 1.8;
             margin-bottom: 25px;
         }
@@ -201,12 +217,12 @@
 
         .expertise-label {
             font-size: 0.85em;
-            color: var(--primary-dark);
+            color: var(--deep-green);
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 10px;
-            font-weight: 600;
-            font-family: 'Arial', sans-serif;
+            font-weight: 700;
+            font-family: 'DM Sans', sans-serif;
         }
 
         .expertise-list {
@@ -216,39 +232,45 @@
         }
 
         .expertise-tag {
-            background: linear-gradient(135deg, var(--accent-gold), var(--accent-warm));
-            color: white;
+            background: var(--cream);
+            color: var(--deep-green);
             padding: 8px 16px;
             border-radius: 25px;
             font-size: 0.85em;
-            font-weight: 500;
+            font-weight: 600;
+            border: 1px solid var(--border);
         }
 
         .highlight {
-            background: var(--bg-warm);
+            background: var(--warm-white);
             padding: 20px;
-            border-left: 4px solid var(--accent-gold);
+            border-left: 4px solid var(--saffron);
             border-radius: 4px;
             font-size: 0.95em;
             color: var(--text-dark);
             margin-top: 20px;
             font-style: italic;
+            border-right: 1px solid var(--border);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
         }
 
         /* Impact Section */
         .impact-section {
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+            background: linear-gradient(135deg, var(--deep-green), var(--forest));
             color: white;
             padding: 80px 40px;
-            border-radius: 12px;
+            border-radius: 16px;
             text-align: center;
             margin-top: 80px;
+            box-shadow: 0 15px 35px rgba(26, 61, 43, 0.2);
         }
 
         .impact-title {
-            font-size: 2em;
+            font-size: 2.2em;
             margin-bottom: 40px;
-            font-weight: 600;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
         }
 
         .impact-stats {
@@ -260,17 +282,18 @@
 
         .stat {
             padding: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .stat-number {
             font-size: 2.5em;
-            color: var(--accent-gold);
+            color: var(--saffron);
             font-weight: 700;
             margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
         }
 
         .stat-label {
@@ -282,78 +305,45 @@
         .mission-section {
             padding: 60px 40px;
             background: white;
-            border-radius: 12px;
+            border-radius: 16px;
             margin-top: 60px;
-            box-shadow: 0 5px 20px rgba(26, 77, 62, 0.08);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
         }
 
         .mission-title {
-            font-size: 1.8em;
-            color: var(--primary-dark);
+            font-size: 2em;
+            color: var(--deep-green);
             margin-bottom: 25px;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .mission-text {
-            font-size: 1.05em;
-            color: #555;
+            font-size: 1.1em;
+            color: var(--text-mid);
             line-height: 1.9;
         }
 
         /* Animations */
         @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2em;
-            }
-
-            .header p {
-                font-size: 1em;
-            }
-
-            .section-title {
-                font-size: 1.8em;
-            }
-
-            .ceo-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .ceo-name {
-                font-size: 1.5em;
-            }
-
-            .ceo-info {
-                padding: 30px;
-            }
-
-            .impact-stats {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
+            .header h1 { font-size: 2.2em; }
+            .header p { font-size: 1.1em; }
+            .section-title { font-size: 1.8em; }
+            .ceo-grid { grid-template-columns: 1fr; gap: 40px; }
+            .ceo-name { font-size: 1.8em; }
+            .ceo-info { padding: 30px; }
+            .impact-stats { grid-template-columns: 1fr; gap: 20px; }
         }
     </style>
 </head>
@@ -377,7 +367,7 @@
                 <!-- Riya Singh Card -->
                 <div class="ceo-card">
                     <div class="ceo-image-wrapper">
-                        <img src="assets/images/riya-singh.png" alt="Riya Singh - CEO" class="ceo-image">
+                        <img src="assets/images/riya-singh.png" alt="Riya Singh - CEO" class="ceo-image riya-photo">
                     </div>
                     <div class="ceo-info">
                         <div class="ceo-title">CEO & Co-Founder</div>
