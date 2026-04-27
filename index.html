@@ -8,10 +8,8 @@
 
   <!-- 2. PRIMARY SEO META -->
   <title>Ayurvedic Weight Loss Tablets & PCOS Supplements | Shyan Health</title>
-  <meta name="description"
-    content="Natural Ayurvedic tablets for women. 5000+ happy customers. PCOS & PCOD support. 4.8 rating | Free consultation | Pan-India delivery." />
-  <meta name="keywords"
-    content="ayurvedic weight loss tablets india, pcos treatment ayurveda, natural weight loss for women, pcod supplements india, shatavari benefits, ashwagandha women" />
+  <meta name="description" content="Natural Ayurvedic tablets for women. 5000+ happy customers. PCOS & PCOD support. 4.8 rating | Free consultation | Pan-India delivery." />
+  <meta name="keywords" content="ayurvedic weight loss tablets india, pcos treatment ayurveda, natural weight loss for women, pcod supplements india, shatavari benefits, ashwagandha women" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://shyanhealth.com/" />
 
@@ -24,8 +22,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://shyanhealth.com/" />
   <meta property="og:title" content="Ayurvedic Weight Loss & PCOS Supplements | Shyan Health" />
-  <meta property="og:description"
-    content="5000+ Indian women transformed naturally. Ayurvedic PCOS & weight loss tablets. 4.8 rating | Free consultation." />
+  <meta property="og:description" content="5000+ Indian women transformed naturally. Ayurvedic PCOS & weight loss tablets. 4.8 rating | Free consultation." />
   <meta property="og:image" content="https://shyanhealth.com/assets/images/fat-to-fit-tablets.png" />
   <meta property="og:locale" content="en_IN" />
   <meta property="og:site_name" content="Shyan Health" />
@@ -33,8 +30,7 @@
   <!-- 5. TWITTER CARD -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Ayurvedic Weight Loss & PCOS Supplements | Shyan Health" />
-  <meta name="twitter:description"
-    content="5000+ Indian women transformed. Natural Ayurvedic supplements. 4.8 rating." />
+  <meta name="twitter:description" content="5000+ Indian women transformed. Natural Ayurvedic supplements. 4.8 rating." />
   <meta name="twitter:image" content="https://shyanhealth.com/assets/images/fat-to-fit-tablets.png" />
 
   <!-- 6. FAVICON -->
@@ -161,7 +157,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'GA_MEASUREMENT_ID');
   </script>
@@ -376,34 +372,11 @@
     /* ─── HERO ─── */
     .hero {
       position: relative;
-      min-height: 90vh;
+      min-height: 88vh;
       display: flex;
       align-items: center;
       overflow: hidden;
       background: linear-gradient(135deg, #0F2A1C 0%, #1A3D2B 50%, #1F4A34 100%);
-    }
-
-    
-
-    .hero-video-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
-      z-index: 2;
-    }
-
-    .stack-card video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .hero-video-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
-      z-index: 3;
     }
 
     .hero-bg-pattern {
@@ -415,7 +388,6 @@
     }
 
     .hero-leaf {
-      z-index: 3;
       position: absolute;
       right: -5%;
       top: -10%;
@@ -427,10 +399,14 @@
 
     .hero-inner {
       position: relative;
-      z-index: 10; max-width: 1300px;
+      z-index: 2;
+      max-width: 1300px;
       margin: 0 auto;
       padding: 120px 30px;
-      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
 
     .hero-badge {
@@ -570,7 +546,156 @@
       width: 100%;
     }
 
-    
+    .hero-3d-stack {
+      position: relative;
+      width: 320px;
+      height: 480px;
+      transform-style: preserve-3d;
+      transition: all 0.8s ease;
+    }
+
+    .hero-3d-stack:hover {
+      gap: 100px;
+    }
+
+    .stack-card {
+      position: absolute;
+      width: 320px;
+      height: 480px;
+      border-radius: 30px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+      transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .stack-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Automatic Cycling Animation */
+    @keyframes cycle1 {
+
+      0%,
+      100% {
+        transform: translateZ(120px) translateX(80px) rotateY(25deg);
+        z-index: 3;
+        opacity: 1;
+      }
+
+      33% {
+        transform: translateZ(-120px) translateX(-80px) rotateY(-25deg);
+        z-index: 1;
+        opacity: 0.5;
+      }
+
+      66% {
+        transform: translateZ(0px) rotateY(0deg);
+        z-index: 2;
+        opacity: 0.8;
+      }
+    }
+
+    @keyframes cycle2 {
+
+      0%,
+      100% {
+        transform: translateZ(0px) rotateY(0deg);
+        z-index: 2;
+        opacity: 0.8;
+      }
+
+      33% {
+        transform: translateZ(120px) translateX(80px) rotateY(25deg);
+        z-index: 3;
+        opacity: 1;
+      }
+
+      66% {
+        transform: translateZ(-120px) translateX(-80px) rotateY(-25deg);
+        z-index: 1;
+        opacity: 0.5;
+      }
+    }
+
+    @keyframes cycle3 {
+
+      0%,
+      100% {
+        transform: translateZ(-120px) translateX(-80px) rotateY(-25deg);
+        z-index: 1;
+        opacity: 0.5;
+      }
+
+      33% {
+        transform: translateZ(0px) rotateY(0deg);
+        z-index: 2;
+        opacity: 0.8;
+      }
+
+      66% {
+        transform: translateZ(120px) translateX(80px) rotateY(25deg);
+        z-index: 3;
+        opacity: 1;
+      }
+    }
+
+    .card-front {
+      animation: cycle1 12s infinite;
+    }
+
+    .card-mid {
+      animation: cycle2 12s infinite;
+    }
+
+    .card-back {
+      animation: cycle3 12s infinite;
+    }
+
+    /* Hover Fan-out */
+    .hero-visual-3d:hover .card-front {
+      transform: translateZ(150px) translateX(220px) rotateY(15deg);
+      animation-play-state: paused;
+      opacity: 1;
+      z-index: 10;
+    }
+
+    .hero-visual-3d:hover .card-mid {
+      transform: translateZ(50px) translateX(0) rotateY(0deg);
+      animation-play-state: paused;
+      opacity: 1;
+      z-index: 5;
+    }
+
+    .hero-visual-3d:hover .card-back {
+      transform: translateZ(150px) translateX(-220px) rotateY(-15deg);
+      animation-play-state: paused;
+      opacity: 1;
+      z-index: 10;
+    }
+
+    .hero-3d-floating-element {
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      background: rgba(232, 168, 32, 0.2);
+      border-radius: 50%;
+      filter: blur(60px);
+      z-index: -1;
+      animation: auraFloat 12s ease-in-out infinite;
+    }
+
+    @keyframes auraFloat {
+
+      0%,
+      100% {
+        transform: scale(1) translate(0, 0);
+        opacity: 0.3;
+      }
 
       50% {
         transform: scale(1.3) translate(60px, -60px);
@@ -1822,14 +1947,12 @@
         padding-bottom: 60px;
       }
 
-      .hero-visual,
-      .hero-visual-3d {
+      .hero-visual, .hero-visual-3d {
         display: flex;
         height: 320px;
         margin-top: -20px;
         margin-bottom: 20px;
       }
-
       .hero-3d-stack {
         transform: scale(0.55);
       }
@@ -1875,51 +1998,18 @@
       }
     }
 
-
+    
     @media (max-width: 600px) {
-
-      .trust-inner,
-      .focus-grid,
-      .products-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-inner {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
-
-      .hero h1 {
-        font-size: 36px;
-      }
-
-      .hero-stats {
-        flex-direction: column;
-        gap: 20px;
-      }
-
-      .section-title {
-        font-size: 28px;
-      }
-
-      .header-actions {
-        display: none;
-      }
-
-      .header-inner {
-        justify-content: center;
-      }
-
-      .newsletter-form {
-        flex-direction: column;
-      }
-
-      .aya-card:nth-child(2),
-      .aya-card:nth-child(4) {
-        margin-top: 0;
-      }
+      .trust-inner, .focus-grid, .products-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+      .hero h1 { font-size: 36px; }
+      .hero-stats { flex-direction: column; gap: 20px; }
+      .section-title { font-size: 28px; }
+      .header-actions { display: none; }
+      .header-inner { justify-content: center; }
+      .newsletter-form { flex-direction: column; }
+      .aya-card:nth-child(2), .aya-card:nth-child(4) { margin-top: 0; }
     }
-
     /* ─── CART SYSTEM ─── */
     /* ─── CHECKOUT SYSTEM ─── */
     .checkout-drawer {
@@ -2574,11 +2664,7 @@
         grid-template-columns: 1fr;
       }
     }
-
-    .badge-launching {
-      background: #9E9E9E;
-      color: white;
-    }
+    .badge-launching { background: #9E9E9E; color: white; }
 
     /* Lead Capture Popup */
     .lead-popup-overlay {
@@ -2641,7 +2727,7 @@
       gap: 15px;
     }
 
-    .lead-form-group input,
+    .lead-form-group input, 
     .lead-form-group select,
     .lead-form-row input {
       width: 100%;
@@ -2655,7 +2741,7 @@
       background: white;
     }
 
-    .lead-form-group input:focus,
+    .lead-form-group input:focus, 
     .lead-form-row input:focus {
       border-color: var(--saffron);
     }
@@ -2682,7 +2768,6 @@
       .lead-popup-content {
         padding: 30px 20px;
       }
-
       .lead-popup-header h2 {
         font-size: 22px;
       }
@@ -2713,64 +2798,53 @@
       background: #ff1a1a;
       transform: scale(1.1);
     }
-
+  
     /* ─── MOBILE RESPONSIVENESS IMPROVEMENTS ─── */
     @media (max-width: 768px) {
       .bmi-section {
         padding: 50px 15px;
       }
-
       .bmi-container {
         grid-template-columns: 1fr;
         padding: 30px 20px !important;
         gap: 30px;
         border-radius: 20px;
       }
-
       .bmi-info h2 {
         font-size: 32px !important;
         margin-bottom: 15px;
         line-height: 1.3;
       }
-
       .bmi-info p {
         font-size: 15px;
       }
-
       .bmi-form {
         gap: 15px;
       }
-
-      .bmi-form>div[style*="grid-template-columns"] {
+      .bmi-form > div[style*="grid-template-columns"] {
         grid-template-columns: 1fr !important;
         gap: 15px !important;
       }
-
       .bmi-result-card {
         padding: 25px 15px;
         border-radius: 16px;
         margin-top: 20px;
       }
-
       .bmi-value {
         font-size: 46px !important;
         margin: 5px 0;
       }
-
       .bmi-cat {
         font-size: 18px;
         margin-bottom: 10px;
       }
-
       .bmi-input-group label {
         font-size: 12px;
       }
-
       .bmi-input {
         padding: 12px 14px;
         font-size: 14px;
       }
-
       .bmi-container button {
         padding: 14px;
         font-size: 15px;
@@ -2778,130 +2852,43 @@
     }
 
     /* ─── GLOBAL MOBILE SMOOTHNESS ─── */
-    html,
-    body {
+    html, body {
       overflow-x: hidden;
       width: 100%;
       -webkit-font-smoothing: antialiased;
     }
-
+    
     @media (max-width: 768px) {
       .section-inner {
         padding: 0 15px;
       }
-
-      .ayurveda-inner,
-      .about-content {
+      .ayurveda-inner, .about-content {
         padding: 0 15px;
       }
-
       .marquee-item {
         font-size: 16px;
       }
-
       .about-grid-mobile {
         grid-template-columns: 1fr !important;
         gap: 30px !important;
       }
-
       .about-visual {
         order: 2;
       }
-
       .about-content {
         order: 1;
         text-align: center;
       }
-
       .about-content .section-title {
         text-align: center !important;
       }
-
       .about-content div[style*="display: flex"] {
         justify-content: center;
       }
-
       .founders-photos-grid div {
         height: 200px !important;
       }
     }
-  
-    .hero-3d-stack {
-      position: relative;
-      width: 320px;
-      height: 480px;
-      transform-style: preserve-3d;
-      margin: 0 auto;
-    }
-
-    .stack-card {
-      position: absolute;
-      inset: 0;
-      border-radius: 30px;
-      overflow: hidden;
-      background: white;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-      transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
-      border: 1px solid var(--border);
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .stack-card img, .stack-card video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .stack-card.active-front {
-      opacity: 1;
-      visibility: visible;
-      transform: translateZ(100px) rotateY(0deg) translateX(0);
-      z-index: 10;
-    }
-
-    .stack-card.active-mid {
-      opacity: 0.8;
-      visibility: visible;
-      transform: translateZ(0px) rotateY(15deg) translateX(80px);
-      z-index: 5;
-    }
-
-    .stack-card.active-back {
-      opacity: 0.6;
-      visibility: visible;
-      transform: translateZ(-100px) rotateY(-15deg) translateX(-80px);
-      z-index: 1;
-    }
-
-    @media (max-width: 900px) {
-      .hero {
-        padding: 40px 0;
-        min-height: auto;
-      }
-      .hero-inner {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        text-align: center;
-      }
-      .hero-visual {
-        order: -1;
-        height: 400px;
-        display: flex;
-        justify-content: center;
-      }
-      .hero-3d-stack {
-        width: 240px;
-        height: 360px;
-      }
-      .stack-card.active-mid {
-        transform: translateZ(0px) rotateY(10deg) translateX(40px);
-      }
-      .stack-card.active-back {
-        transform: translateZ(-50px) rotateY(-10deg) translateX(-40px);
-      }
-    }
-
 </style>
 
 
@@ -2947,9 +2934,9 @@
 
   <!-- HERO -->
   <section class="hero">
-    
-    <div class="hero-bg-pattern" style="z-index: 4;"></div>
-    <div class="hero-inner" style="z-index: 10; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center;">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-leaf"></div>
+    <div class="hero-inner">
       <div class="hero-content">
         <div class="hero-badge">🍃 Ayurvedic Wellness Programme</div>
         <h1>Natural Ayurvedic Weight Loss for Indian Women | Fat to Fit Journey</h1>
@@ -2981,37 +2968,28 @@
       <div class="hero-visual">
         <div class="hero-visual-3d">
           <div class="hero-3d-floating-element" style="top: -10%; left: -20%;"></div>
-          <div class="hero-3d-floating-element" style="bottom: -10%; right: -20%; background: rgba(107, 143, 113, 0.15);"></div>
+          <div class="hero-3d-floating-element"
+            style="bottom: -10%; right: -20%; background: rgba(107, 143, 113, 0.15);"></div>
 
-          <div class="hero-3d-stack" id="heroGallery">
-            <!-- 8 Dynamic Items (3 Videos, 5 Photos) -->
-            <div class="stack-card" data-index="0">
-              <video autoplay muted loop playsinline><source src="assets/videos/hero-1.mp4" type="video/mp4"></video>
+          <div class="hero-3d-stack">
+            <!-- Back Card -->
+            <div class="stack-card card-back">
+              <img src="assets/images/hero-journey.png" alt="Indian woman's natural Ayurvedic weight loss journey – Shyan Health" loading="lazy">
             </div>
-            <div class="stack-card" data-index="1">
-              <video autoplay muted loop playsinline><source src="assets/videos/hero-2.mp4" type="video/mp4"></video>
+
+            <!-- Middle Card -->
+            <div class="stack-card card-mid">
+              <img src="assets/images/natural-ingredients.png" alt="Natural Ayurvedic herbs – ashwagandha, shatavari, triphala by Shyan Health"
+                loading="lazy">
             </div>
-            <div class="stack-card" data-index="2">
-              <video autoplay muted loop playsinline><source src="assets/videos/hero-3.mp4" type="video/mp4"></video>
-            </div>
-            <div class="stack-card" data-index="3">
-              <img src="assets/images/hero-card-1.png" alt="Fat to Fit Tablets" loading="lazy">
-            </div>
-            <div class="stack-card" data-index="4">
-              <img src="assets/images/hero-card-2.png" alt="Ayurvedic Wellness" loading="lazy">
-            </div>
-            <div class="stack-card" data-index="5">
-              <img src="assets/images/hero-card-3.png" alt="PCOS Balance Kit" loading="lazy">
-            </div>
-            <div class="stack-card" data-index="6">
-              <img src="assets/images/hero-card-4.png" alt="PCOS Support" loading="lazy">
-            </div>
-            <div class="stack-card" data-index="7">
-              <img src="assets/images/hero-card-5.png" alt="Natural Weight Loss" loading="lazy">
+
+            <!-- Front Card -->
+            <div class="stack-card card-front">
+              <img src="assets/images/fat-to-fit-tablets.png" alt="Fat to Fit Tablets – Natural Ayurvedic Weight Loss Supplements for Women"
+                loading="lazy">
             </div>
           </div>
         </div>
-      </div>
       </div>
     </div>
   </section>
@@ -3068,39 +3046,28 @@
   <!-- ABOUT US SECTION -->
   <section class="section about-section" id="about" style="background: var(--warm-white);">
     <div class="section-inner">
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;"
-        class="about-grid-mobile">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;" class="about-grid-mobile">
         <div class="about-visual" style="position: relative;">
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;" class="founders-photos-grid">
-            <div
-              style="background: var(--cream); border-radius: 20px; overflow: hidden; height: 300px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transform: translateY(30px); transition: transform 0.3s ease;">
-              <img src="assets/images/riya-singh.png" alt="Riya Singh"
-                style="width: 100%; height: 100%; object-fit: cover; object-position: center 15%; transition: transform 0.5s ease;"
-                onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            <div style="background: var(--cream); border-radius: 20px; overflow: hidden; height: 300px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transform: translateY(30px); transition: transform 0.3s ease;">
+              <img src="assets/images/riya-singh.png" alt="Riya Singh" style="width: 100%; height: 100%; object-fit: cover; object-position: center 15%; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
             </div>
-            <div
-              style="background: var(--cream); border-radius: 20px; overflow: hidden; height: 300px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease;">
-              <img src="assets/images/abhinash-singh.jfif" alt="Abhinash Singh"
-                style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
-                onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            <div style="background: var(--cream); border-radius: 20px; overflow: hidden; height: 300px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease;">
+              <img src="assets/images/abhinash-singh.jfif" alt="Abhinash Singh" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
             </div>
           </div>
-          <div
-            style="position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); background: var(--deep-green); color: white; padding: 15px 30px; border-radius: 50px; font-weight: 700; white-space: nowrap; box-shadow: 0 10px 25px rgba(26, 61, 43, 0.3);">
+          <div style="position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); background: var(--deep-green); color: white; padding: 15px 30px; border-radius: 50px; font-weight: 700; white-space: nowrap; box-shadow: 0 10px 25px rgba(26, 61, 43, 0.3);">
             Meet Our Founders 🌿
           </div>
         </div>
         <div class="about-content">
           <div class="section-tag">About Shyan Health</div>
-          <h2 class="section-title" style="text-align: left; margin-bottom: 25px;">Our Mission is Your <br><em
-              style="color:var(--saffron)">Natural Transformation</em></h2>
+          <h2 class="section-title" style="text-align: left; margin-bottom: 25px;">Our Mission is Your <br><em style="color:var(--saffron)">Natural Transformation</em></h2>
           <p style="font-size: 1.1em; color: var(--text-mid); margin-bottom: 25px; line-height: 1.8;">
-            Shyan Health was born out of a simple vision: to make the transformative power of Ayurveda accessible,
-            scientific, and sustainable for the modern Indian woman.
+            Shyan Health was born out of a simple vision: to make the transformative power of Ayurveda accessible, scientific, and sustainable for the modern Indian woman. 
           </p>
           <p style="font-size: 1em; color: var(--text-light); margin-bottom: 30px; line-height: 1.7;">
-            Founded by <strong>Riya Singh</strong> and <strong>Abhinash Singh</strong>, we combine deep wellness
-            expertise with strategic growth to build a community where health isn't just a goal, but a way of life.
+            Founded by <strong>Riya Singh</strong> and <strong>Abhinash Singh</strong>, we combine deep wellness expertise with strategic growth to build a community where health isn't just a goal, but a way of life.
           </p>
           <div style="display: flex; gap: 20px;">
             <a href="about.html" class="btn-primary">Learn Our Story</a>
@@ -3423,8 +3390,7 @@
             <h4>7-Day Vegetarian Keto Sample</h4>
             <div class="meal-day">
               <h4>Monday</h4>
-              <p>B: Paneer scramble with spinach | L: Zucchini noodles with pesto and walnuts | D: Cauliflower rice with
-                grilled tofu</p>
+              <p>B: Paneer scramble with spinach | L: Zucchini noodles with pesto and walnuts | D: Cauliflower rice with grilled tofu</p>
             </div>
           </div>
         </div>
@@ -3464,8 +3430,7 @@
         </div>
         <div class="blog-content">
           <h2>Sattvic Principles</h2>
-          <p>The Ayurvedic diet focuses on fresh, whole, and plant-based foods that promote harmony and vitality (Ojas).
-          </p>
+          <p>The Ayurvedic diet focuses on fresh, whole, and plant-based foods that promote harmony and vitality (Ojas).</p>
           <table class="diet-table">
             <tr>
               <th>Included (Sattvic)</th>
@@ -3482,8 +3447,7 @@
           </table>
           <div class="meal-plan-box">
             <h4>Daily Sattvic Routine</h4>
-            <p>Start with warm lemon water, followed by fresh fruit or porridge for breakfast, and a balanced Khichdi
-              for lunch.</p>
+            <p>Start with warm lemon water, followed by fresh fruit or porridge for breakfast, and a balanced Khichdi for lunch.</p>
           </div>
         </div>
       </article>
@@ -3562,56 +3526,38 @@
   <!-- EXPERT VERIFICATION -->
   <section class="expert-verification-section" style="background: #fdf6e9; padding: 80px 0;">
     <div class="section-inner">
-      <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 40px; align-items: center;"
-        class="expert-grid-mobile">
+      <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 40px; align-items: center;" class="expert-grid-mobile">
         <div style="text-align: center;">
           <div style="position: relative; display: inline-block;">
-            <img src="assets/images/dr-shalini-rana.jpg" alt="Dr. Shalini Rana (PT) - Shyan Health Expert"
-              style="width: 260px; height: 260px; border-radius: 32px; object-fit: cover; border: 1px solid var(--border); box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
-            <div
-              style="position: absolute; bottom: -15px; right: -15px; background: var(--saffron); color: var(--deep-green); padding: 12px 20px; border-radius: 12px; font-weight: 800; font-size: 14px; box-shadow: 0 10px 20px rgba(232,168,32,0.3);">
+            <img src="assets/images/dr-shalini-rana.jpg" alt="Dr. Shalini Rana (PT) - Shyan Health Expert" 
+                 style="width: 260px; height: 260px; border-radius: 32px; object-fit: cover; border: 1px solid var(--border); box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+            <div style="position: absolute; bottom: -15px; right: -15px; background: var(--saffron); color: var(--deep-green); padding: 12px 20px; border-radius: 12px; font-weight: 800; font-size: 14px; box-shadow: 0 10px 20px rgba(232,168,32,0.3);">
               Clinical Expert
             </div>
             <div style="margin-top: 25px; display: flex; gap: 15px; justify-content: center;">
-              <a href="https://nutrimindbydrshalinirana.com/" target="_blank" title="Website"
-                style="text-decoration: none; font-size: 20px;">🌐</a>
-              <a href="https://www.instagram.com/nutrimindbydrshalinirana/" target="_blank" title="Instagram"
-                style="text-decoration: none; font-size: 20px;">📸</a>
-              <a href="https://www.linkedin.com/in/dr-shalini-rana-pt/" target="_blank" title="LinkedIn"
-                style="text-decoration: none; font-size: 20px;">🔗</a>
+              <a href="https://nutrimindbydrshalinirana.com/" target="_blank" title="Website" style="text-decoration: none; font-size: 20px;">🌐</a>
+              <a href="https://www.instagram.com/nutrimindbydrshalinirana/" target="_blank" title="Instagram" style="text-decoration: none; font-size: 20px;">📸</a>
+              <a href="https://www.linkedin.com/in/dr-shalini-rana-pt/" target="_blank" title="LinkedIn" style="text-decoration: none; font-size: 20px;">🔗</a>
             </div>
           </div>
         </div>
         <div>
-          <div class="section-tag" style="background: rgba(232, 168, 32, 0.15); color: var(--turmeric);">Medical
-            Recommendation</div>
-          <h2
-            style="font-family: 'Playfair Display', serif; font-size: 36px; color: var(--deep-green); margin-bottom: 20px; line-height: 1.2;">
-            Expert-Backed Wellness for Every Woman</h2>
-          <p
-            style="font-size: 18px; color: var(--text-mid); line-height: 1.8; margin-bottom: 25px; font-style: italic;">
-            "Shyan Health's integration of Ayurvedic principles with modern clinical nutrition creates a powerful
-            synergy for managing PCOS, hormonal imbalances, and weight. Their focus on root-cause healing is truly
-            transformative."
+          <div class="section-tag" style="background: rgba(232, 168, 32, 0.15); color: var(--turmeric);">Medical Recommendation</div>
+          <h2 style="font-family: 'Playfair Display', serif; font-size: 36px; color: var(--deep-green); margin-bottom: 20px; line-height: 1.2;">Expert-Backed Wellness for Every Woman</h2>
+          <p style="font-size: 18px; color: var(--text-mid); line-height: 1.8; margin-bottom: 25px; font-style: italic;">
+            "Shyan Health's integration of Ayurvedic principles with modern clinical nutrition creates a powerful synergy for managing PCOS, hormonal imbalances, and weight. Their focus on root-cause healing is truly transformative."
           </p>
           <div style="display: flex; align-items: center; gap: 15px;">
             <div style="height: 2px; width: 40px; background: var(--saffron);"></div>
             <div>
               <div style="font-weight: 700; color: var(--deep-green); font-size: 20px;">Dr. Shalini Rana (PT)</div>
-              <div style="font-size: 15px; color: var(--sage); font-weight: 500;">Clinical Nutritionist & Founder of
-                NutriMind</div>
+              <div style="font-size: 15px; color: var(--sage); font-weight: 500;">Clinical Nutritionist & Founder of NutriMind</div>
             </div>
           </div>
           <div style="margin-top: 30px; display: flex; gap: 15px; flex-wrap: wrap;">
-            <span
-              style="background: white; padding: 8px 16px; border-radius: 50px; font-size: 13px; font-weight: 600; color: var(--deep-green); border: 1px solid var(--border);">Hormonal
-              Balance Expert</span>
-            <span
-              style="background: white; padding: 8px 16px; border-radius: 50px; font-size: 13px; font-weight: 600; color: var(--deep-green); border: 1px solid var(--border);">PCOS
-              Specialist</span>
-            <span
-              style="background: white; padding: 8px 16px; border-radius: 50px; font-size: 13px; font-weight: 600; color: var(--deep-green); border: 1px solid var(--border);">Exercise
-              Scientist</span>
+            <span style="background: white; padding: 8px 16px; border-radius: 50px; font-size: 13px; font-weight: 600; color: var(--deep-green); border: 1px solid var(--border);">Hormonal Balance Expert</span>
+            <span style="background: white; padding: 8px 16px; border-radius: 50px; font-size: 13px; font-weight: 600; color: var(--deep-green); border: 1px solid var(--border);">PCOS Specialist</span>
+            <span style="background: white; padding: 8px 16px; border-radius: 50px; font-size: 13px; font-weight: 600; color: var(--deep-green); border: 1px solid var(--border);">Exercise Scientist</span>
           </div>
         </div>
       </div>
@@ -3625,7 +3571,6 @@
         text-align: center;
         gap: 30px !important;
       }
-
       .expert-grid-mobile div {
         display: flex;
         flex-direction: column;
@@ -4452,7 +4397,7 @@
 
     const leadForm = document.getElementById('leadForm');
     if (leadForm) {
-      leadForm.addEventListener('submit', async function (e) {
+      leadForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         stopAutoClose();
 
@@ -4468,7 +4413,7 @@
 
         // 1. Submit to Google Form (Reliable Hidden Iframe Method)
         const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSf3hbZGiIDzuLh6ymfVrKWQ2fN6iVr840dQLSvw4_rLuFlItg/formResponse";
-
+        
         // Create a hidden form and iframe for submission (bypasses CORS)
         let iframe = document.getElementById('gform_mirror');
         if (!iframe) {
@@ -4513,14 +4458,14 @@
             body: JSON.stringify({ name, phone, age, weight, goal, source: 'homepage_popup' })
           });
 
-          console.log('Lead Submission Tracked');
+          console.log('Lead Submission Tracked'); 
           this.style.display = 'none';
           document.getElementById('leadSuccess').style.display = 'block';
-
+          
           // 3. Optional: WhatsApp Redirect
           const waMsg = encodeURIComponent(`Hi Shyan Health! I'm interested in a free consultation.\n\n👤 Name: ${name}\n📞 Phone: ${phone}\n🔢 Age: ${age}\n⚖️ Weight: ${weight}kg\n🎯 Goal: ${goal}`);
           const waUrl = `https://wa.me/918802916080?text=${waMsg}`;
-
+          
           // Open WhatsApp after a brief delay so they see the success message
           setTimeout(() => {
             window.open(waUrl, '_blank');
@@ -4541,38 +4486,9 @@
       setTimeout(showLeadPopup, 4000);
     });
   </script>
-
-  
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const cards = document.querySelectorAll('#heroGallery .stack-card');
-      let currentIndex = 0;
-
-      function updateGallery() {
-        cards.forEach(card => {
-          card.classList.remove('active-front', 'active-mid', 'active-back');
-        });
-
-        const front = currentIndex;
-        const mid = (currentIndex + 1) % cards.length;
-        const back = (currentIndex + 2) % cards.length;
-
-        cards[front].classList.add('active-front');
-        cards[mid].classList.add('active-mid');
-        cards[back].classList.add('active-back');
-
-        currentIndex = (currentIndex + 1) % cards.length;
-      }
-
-      updateGallery();
-      setInterval(updateGallery, 4000);
-    });
-  </script>
 </body>
 
 
 </html>
-
- 
+ 
  
