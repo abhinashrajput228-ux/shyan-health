@@ -489,6 +489,7 @@
 
       <div class="nav-group">
         <div class="nav-label">Management</div>
+        <a class="nav-item" onclick="switchTab('AboutUs')"><i class="fa-solid fa-address-card"></i> About Us</a>
         <a class="nav-item" onclick="switchTab('Customers')"><i class="fa-solid fa-user-group"></i> Customers</a>
         <a class="nav-item" onclick="switchTab('Settings')"><i class="fa-solid fa-sliders"></i> Settings</a>
       </div>
@@ -591,6 +592,83 @@
             </thead>
             <tbody id="ordersTableBody"></tbody>
           </table>
+        </div>
+      </div>
+
+      <div id="sectionAboutUs" class="admin-section" style="display: none;">
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;">
+          <!-- Founder: Riya Singh -->
+          <div class="glass-card">
+            <h3 style="margin-bottom: 20px;"><i class="fa-solid fa-user-tie" style="color:var(--secondary);"></i> Founder: Riya Singh</h3>
+            <div style="display: grid; gap: 15px;">
+              <div><label style="display:block; font-size:11px; color:var(--text-dim); margin-bottom:5px;">Role / Title</label>
+                <input type="text" value="CEO & Co-Founder" style="width:100%; background:var(--glass-bg); border:1px solid var(--border); padding:10px; border-radius:8px; color:white;">
+              </div>
+              <div><label style="display:block; font-size:11px; color:var(--text-dim); margin-bottom:5px;">Bio Description</label>
+                <textarea style="width:100%; background:var(--glass-bg); border:1px solid var(--border); padding:10px; border-radius:8px; color:white; resize:none;">Pioneering wellness expert specializing in Ayurvedic weight management and holistic health transformation.</textarea>
+              </div>
+              <div><label style="display:block; font-size:11px; color:var(--text-dim); margin-bottom:5px;">Profile Image Path</label>
+                <input type="text" value="assets/images/riya-singh.png" style="width:100%; background:var(--glass-bg); border:1px solid var(--border); padding:10px; border-radius:8px; color:white;">
+              </div>
+            </div>
+          </div>
+
+          <!-- Founder: Abhinash Singh -->
+          <div class="glass-card">
+            <h3 style="margin-bottom: 20px;"><i class="fa-solid fa-user-tie" style="color:var(--secondary);"></i> Founder: Abhinash Singh</h3>
+            <div style="display: grid; gap: 15px;">
+              <div><label style="display:block; font-size:11px; color:var(--text-dim); margin-bottom:5px;">Role / Title</label>
+                <input type="text" value="CEO & Founder" style="width:100%; background:var(--glass-bg); border:1px solid var(--border); padding:10px; border-radius:8px; color:white;">
+              </div>
+              <div><label style="display:block; font-size:11px; color:var(--text-dim); margin-bottom:5px;">Bio Description</label>
+                <textarea style="width:100%; background:var(--glass-bg); border:1px solid var(--border); padding:10px; border-radius:8px; color:white; resize:none;">Dynamic entrepreneur and growth strategist with proven expertise in scaling healthcare ventures.</textarea>
+              </div>
+              <div><label style="display:block; font-size:11px; color:var(--text-dim); margin-bottom:5px;">Profile Image Path</label>
+                <input type="text" value="assets/images/abhinash-singh.jfif" style="width:100%; background:var(--glass-bg); border:1px solid var(--border); padding:10px; border-radius:8px; color:white; margin-bottom:5px;">
+              </div>
+              <div><label style="display:block; font-size:11px; color:var(--text-dim); margin-bottom:5px;">Professional Links</label>
+                <input type="text" value="https://www.rekacreativelabs.com/" style="width:100%; background:var(--glass-bg); border:1px solid var(--border); padding:10px; border-radius:8px; color:white; margin-bottom:5px;" placeholder="Company Website">
+                <input type="text" value="https://www.linkedin.com/in/abhinashsinghh/" style="width:100%; background:var(--glass-bg); border:1px solid var(--border); padding:10px; border-radius:8px; color:white;" placeholder="LinkedIn URL">
+              </div>
+            </div>
+          </div>
+
+          <!-- Expert: Dr. Shalini Rana -->
+          <div class="glass-card">
+            <h3 style="margin-bottom: 20px;"><i class="fa-solid fa-user-doctor" style="color:var(--secondary);"></i> Medical Expert: Dr. Shalini Rana</h3>
+            <div style="display: grid; gap: 15px;">
+              <div><label style="display:block; font-size:11px; color:var(--text-dim); margin-bottom:5px;">Role / Title</label>
+                <input type="text" value="Women's Health Expert & Clinical Nutritionist" style="width:100%; background:var(--glass-bg); border:1px solid var(--border); padding:10px; border-radius:8px; color:white;">
+              </div>
+              <div><label style="display:block; font-size:11px; color:var(--text-dim); margin-bottom:5px;">Social Links (Website, Insta, LinkedIn)</label>
+                <input type="text" value="https://nutrimindbydrshalinirana.com/" style="width:100%; background:var(--glass-bg); border:1px solid var(--border); padding:10px; border-radius:8px; color:white; margin-bottom:5px;">
+                <input type="text" value="https://instagram.com/nutrimindbydrshalinirana/" style="width:100%; background:var(--glass-bg); border:1px solid var(--border); padding:10px; border-radius:8px; color:white; margin-bottom:5px;">
+                <input type="text" value="https://linkedin.com/in/dr-shalini-rana-pt/" style="width:100%; background:var(--glass-bg); border:1px solid var(--border); padding:10px; border-radius:8px; color:white;">
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Information -->
+          <div class="glass-card">
+            <h3 style="margin-bottom: 20px;"><i class="fa-solid fa-headset" style="color:var(--secondary);"></i> Contact & Support</h3>
+            <div style="display: grid; gap: 15px;">
+              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                <div><label style="display:block; font-size:11px; color:var(--text-dim); margin-bottom:5px;">Primary Phone</label>
+                  <input type="text" value="+91 88029 16080" style="width:100%; background:var(--glass-bg); border:1px solid var(--border); padding:10px; border-radius:8px; color:white;">
+                </div>
+                <div><label style="display:block; font-size:11px; color:var(--text-dim); margin-bottom:5px;">Support Phone</label>
+                  <input type="text" value="+91 93184 57857" style="width:100%; background:var(--glass-bg); border:1px solid var(--border); padding:10px; border-radius:8px; color:white;">
+                </div>
+              </div>
+              <div><label style="display:block; font-size:11px; color:var(--text-dim); margin-bottom:5px;">Public Email</label>
+                <input type="text" value="sales@shyanhealth.com" style="width:100%; background:var(--glass-bg); border:1px solid var(--border); padding:10px; border-radius:8px; color:white;">
+              </div>
+            </div>
+          </div>
+
+          <div style="grid-column: 1 / -1; text-align: center;">
+            <button class="btn-premium" onclick="showToast('About Us data updated successfully!', 'success')"><i class="fa-solid fa-floppy-disk"></i> Save All Changes</button>
+          </div>
         </div>
       </div>
 
@@ -854,7 +932,8 @@
 
       // Update Main Button
       const mainBtn = document.getElementById('mainActionBtn');
-      mainBtn.style.display = tab === 'Products' || tab === 'Overview' ? 'flex' : 'none';
+      mainBtn.style.display = tab === 'Products' || tab === 'Overview' || tab === 'AboutUs' ? 'flex' : 'none';
+      if (tab === 'AboutUs') mainBtn.style.display = 'none'; // Hide "New Product" button on About Us tab
 
       if (tab === 'Overview') fetchStats();
       if (tab === 'Products') fetchProducts();
