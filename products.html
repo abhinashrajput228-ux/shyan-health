@@ -13,6 +13,17 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://checkout.razorpay.com/v1/checkout.js" async></script>
   
+  <!-- Firebase SDKs -->
+  <script type="importmap">
+    {
+      "imports": {
+        "firebase/app": "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js",
+        "firebase/auth": "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js",
+        "firebase/firestore": "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"
+      }
+    }
+  </script>
+  
   <style>
     :root {
       --saffron: #E8A820;
@@ -586,6 +597,183 @@
       .sidebar { display: none; }
     }
     .badge-launching { background: #9E9E9E; color: white; }
+
+    /* ─── CHECKOUT MODAL ─── */
+    .checkout-modal {
+      max-width: 600px;
+      width: 95%;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--deep-green);
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 20px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 15px;
+      transition: border-color 0.3s;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--turmeric);
+    }
+
+    .otp-input-container {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .otp-digit {
+      width: 45px;
+      height: 55px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--deep-green);
+    }
+
+    .otp-digit:focus {
+      border-color: var(--turmeric);
+      outline: none;
+    }
+
+    #recaptcha-container {
+      margin: 15px 0;
+    }
+
+    .verification-step {
+      display: none;
+    }
+
+    .verification-step.active {
+      display: block;
+    }
+
+    .payment-options {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .payment-option {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.3s;
+      gap: 15px;
+    }
+
+    .payment-option.active {
+      border-color: var(--deep-green);
+      background: var(--cream);
+      box-shadow: 0 4px 12px rgba(26, 61, 43, 0.08);
+    }
+
+    .payment-option input {
+      display: none;
+    }
+
+    .payment-radio {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .payment-option.active .payment-radio {
+      border-color: var(--deep-green);
+    }
+
+    .payment-option.active .payment-radio::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      background: var(--deep-green);
+      border-radius: 50%;
+    }
+
+    .payment-info {
+      flex-grow: 1;
+    }
+
+    .payment-title {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--deep-green);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .payment-sub {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+
+    .payment-badge {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 50px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .badge-prepaid { background: #E8F5E9; color: #2E7D32; }
+    .badge-cod { background: #FFF3E0; color: #EF6C00; }
+
+    .checkout-summary {
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 2px dashed var(--border);
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: var(--text-mid);
+    }
+
+    .summary-row.total {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--deep-green);
+    }
+
+    .summary-row.to-pay {
+      font-size: 20px;
+      color: var(--turmeric);
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
   </style>
 </head>
 
@@ -740,7 +928,7 @@
         <span>Total Amount</span>
         <span id="cartTotalValue">₹0</span>
       </div>
-      <button class="btn-checkout" onclick="alert('Checkout integration coming soon!')">Proceed to Checkout 💳</button>
+      <button class="btn-checkout" id="checkoutBtn" onclick="openCheckout()">Proceed to Checkout 💳</button>
     </div>
   </div>
 
@@ -763,13 +951,179 @@
       </div>
       
       <div style="display:flex; gap:15px">
-        <button onclick="addToCartFromModal()" style="flex:1; background:var(--deep-green); color:white; border:none; padding:16px; border-radius:50px; font-weight:700; cursor:pointer">Add to Cart 🛒</button>
-        <button onclick="whatsappOrder()" style="flex:1; background:var(--forest); color:white; border:none; padding:16px; border-radius:50px; font-weight:700; cursor:pointer">WhatsApp 💬</button>
+        <button id="modalAddBtn" onclick="addToCartFromModal()" style="flex:1; background:var(--deep-green); color:white; border:none; padding:16px; border-radius:50px; font-weight:700; cursor:pointer">Add to Cart 🛒</button>
+        <button id="modalWaBtn" onclick="whatsappOrder()" style="flex:1; background:var(--forest); color:white; border:none; padding:16px; border-radius:50px; font-weight:700; cursor:pointer">WhatsApp 💬</button>
       </div>
     </div>
   </div>
 
-  <script>
+  <!-- CHECKOUT MODAL -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal checkout-modal">
+      <button class="modal-close" onclick="closeCheckout()">✕</button>
+      
+      <!-- Step 0: Login/Auth -->
+      <div id="stepLogin" class="verification-step active">
+        <h2 style="font-family:'Playfair Display', serif; color:var(--deep-green); margin-bottom:10px">Welcome to Shyan Health</h2>
+        <p style="color:var(--text-light); margin-bottom:25px; font-size:14px">Please login or sign up to continue with your order.</p>
+        
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="loginName" class="form-input" placeholder="Enter your name">
+        </div>
+        
+        <div class="form-group">
+          <label>Phone Number</label>
+          <div style="display:flex; gap:10px">
+            <input type="text" value="+91" disabled style="width:60px; text-align:center; background:#f0f0f0" class="form-input">
+            <input type="tel" id="loginPhone" class="form-input" placeholder="10-digit mobile number" maxlength="10">
+          </div>
+        </div>
+
+        <div id="recaptcha-container"></div>
+        
+        <button onclick="sendLoginOTP()" class="btn-checkout" style="margin-top:10px; display:flex; align-items:center; justify-content:center">
+          Continue with OTP <div id="loginSpinner" class="loading-spinner"></div>
+        </button>
+      </div>
+
+      <!-- Step 0.5: OTP Verification -->
+      <div id="stepOTP" class="verification-step">
+        <div style="text-align:center">
+          <div style="font-size:50px; margin-bottom:20px">📱</div>
+          <h2 style="font-family:'Playfair Display', serif; color:var(--deep-green); margin-bottom:10px">Verify Phone</h2>
+          <p style="color:var(--text-light); font-size:14px">Enter the 6-digit code sent to <span id="displayPhone" style="font-weight:700; color:var(--deep-green)"></span></p>
+          
+          <div class="otp-input-container">
+            <input type="text" class="otp-digit" maxlength="1" onkeyup="moveOTPFocus(this, 'otp2')" id="otp1">
+            <input type="text" class="otp-digit" maxlength="1" onkeyup="moveOTPFocus(this, 'otp3')" id="otp2">
+            <input type="text" class="otp-digit" maxlength="1" onkeyup="moveOTPFocus(this, 'otp4')" id="otp3">
+            <input type="text" class="otp-digit" maxlength="1" onkeyup="moveOTPFocus(this, 'otp5')" id="otp4">
+            <input type="text" class="otp-digit" maxlength="1" onkeyup="moveOTPFocus(this, 'otp6')" id="otp5">
+            <input type="text" class="otp-digit" maxlength="1" id="otp6">
+          </div>
+
+          <button onclick="verifyLoginOTP()" class="btn-checkout" style="display:flex; align-items:center; justify-content:center">
+            Verify & Continue <div id="verifySpinner" class="loading-spinner"></div>
+          </button>
+          
+          <button onclick="resetToLogin()" style="background:none; border:none; color:var(--sage); margin-top:20px; cursor:pointer; font-size:14px; text-decoration:underline">Change Phone Number</button>
+        </div>
+      </div>
+
+      <!-- Step 1: Shipping & Payment Information -->
+      <div id="stepInfo" class="verification-step">
+        <h2 style="font-family:'Playfair Display', serif; color:var(--deep-green); margin-bottom:10px">Checkout Info</h2>
+        
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="custName" class="form-input" placeholder="Enter your full name">
+        </div>
+        
+        <div class="form-group">
+          <label>Phone Number</label>
+          <div style="display:flex; gap:10px; align-items:center">
+            <input type="text" value="+91" disabled style="width:60px; text-align:center; background:#f0f0f0" class="form-input">
+            <input type="tel" id="custPhone" class="form-input" placeholder="10-digit mobile number" maxlength="10">
+            <button onclick="handleLogout()" style="background:none; border:none; color:var(--rose); font-size:12px; cursor:pointer; text-decoration:underline; white-space:nowrap">Not you? Logout</button>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Delivery Address</label>
+          <textarea id="custAddress" class="form-input" rows="3" placeholder="House No, Street, Landmark..."></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label>City & Pincode</label>
+          <div style="display:grid; grid-template-columns: 1fr 120px; gap:15px">
+            <input type="text" id="custCity" class="form-input" placeholder="City">
+            <input type="text" id="custPin" class="form-input" placeholder="PIN" maxlength="6">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Payment Mode</label>
+          <div class="payment-options">
+            <div class="payment-option active" onclick="selectPayment('prepaid', this)">
+              <div class="payment-radio"></div>
+              <div class="payment-info">
+                <div class="payment-title">Prepaid <span class="payment-badge badge-prepaid">FREE DELIVERY</span></div>
+                <div class="payment-sub">Pay full amount now</div>
+              </div>
+            </div>
+            <div class="payment-option" onclick="selectPayment('cod', this)">
+              <div class="payment-radio"></div>
+              <div class="payment-info">
+                <div class="payment-title">COD <span class="payment-badge badge-cod">₹299 ADVANCE</span></div>
+                <div class="payment-sub">Cash on Delivery</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="checkout-summary" style="background:var(--cream); padding:15px; border-radius:16px; margin-bottom:20px">
+          <div class="summary-row">
+            <span>Order Total:</span>
+            <span id="summaryTotal" style="font-weight:700">₹0</span>
+          </div>
+          <div class="summary-row total to-pay" style="border-top:1px solid var(--border); padding-top:10px; margin-top:10px">
+            <span>To Pay Now:</span>
+            <span id="summaryToPay">₹0</span>
+          </div>
+        </div>
+
+        <button onclick="handlePaymentAndOrder()" class="btn-checkout" style="display:flex; align-items:center; justify-content:center">
+          Pay & Place Order 🚀 <div id="paySpinner" class="loading-spinner"></div>
+        </button>
+      </div>
+
+      <!-- Step 2: Success -->
+      <div id="stepSuccess" class="verification-step">
+        <div style="text-align:center; padding:20px 0">
+          <div style="width:80px; height:80px; background:#E8F5E9; color:#2E7D32; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:40px; margin:0 auto 20px">✓</div>
+          <h2 style="font-family:'Playfair Display', serif; color:var(--deep-green); margin-bottom:10px">Order Placed!</h2>
+          <p style="color:var(--text-light); margin-bottom:30px">Your order has been successfully placed. Our team will contact you shortly for confirmation.</p>
+          <button onclick="closeCheckout(true)" class="btn-checkout">Continue Shopping</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "firebase/app";
+    import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, onAuthStateChanged } from "firebase/auth";
+    import { getFirestore, collection, addDoc, serverTimestamp, doc, setDoc } from "firebase/firestore";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA9yhYqpZnKLC4Pgu4Mft7OirDsJ0ZIi3U",
+      authDomain: "shyan-health.firebaseapp.com",
+      databaseURL: "https://shyan-health-default-rtdb.firebaseio.com",
+      projectId: "shyan-health",
+      storageBucket: "shyan-health.firebasestorage.app",
+      messagingSenderId: "1083675176001",
+      appId: "1:1083675176001:web:e9fc72b6021dc8061caac0",
+      measurementId: "G-JTV8L8QYPM"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    let confirmationResult = null;
+    let currentUser = null;
+
+    // Monitor Auth State
+    onAuthStateChanged(auth, (user) => {
+      currentUser = user;
+      if (user) {
+        console.log("Logged in as:", user.phoneNumber);
+        const phoneNo = user.phoneNumber.replace('+91', '');
+        document.getElementById('custPhone').value = phoneNo;
+        const savedName = localStorage.getItem('shyan_user_name');
+        if (savedName) document.getElementById('custName').value = savedName;
+      }
+    });
+
     const products = [
       { id: 1, image: 'assets/images/fat-to-fit-tablets.png', emoji: '🌿', name: 'Fat to Fit Tablets', cat: 'Weight Management', desc: 'Our flagship formula combining 12 potent Ayurvedic herbs for natural weight management and metabolism boost.', price: 3000, mrp: 4299, badge: 'best', rating: 4.9, reviews: 342, usage: 'Take 2 tablets twice daily after meals with warm water.' },
       { id: 2, image: 'assets/images/pcos-balance-kit.png', emoji: '🌸', name: 'PCOS Balance Kit', cat: 'Women\'s Health', desc: 'Specially formulated to regulate hormones, reduce inflammation, and support women with PCOS naturally.', price: 2500, mrp: 3499, badge: 'new', rating: 4.8, reviews: 218, usage: 'Take 1 tablet morning and evening after food.' },
@@ -785,6 +1139,7 @@
 
     let currentProduct = null;
     let cart = JSON.parse(localStorage.getItem('shyan_cart')) || [];
+    let selectedPaymentMode = 'prepaid';
 
     function renderProducts(filteredList) {
       const grid = document.getElementById('productsGrid');
@@ -811,7 +1166,7 @@
       `).join('');
     }
 
-    function openModal(id) {
+    window.openModal = function(id) {
       const p = products.find(x => x.id === id);
       currentProduct = p;
       document.getElementById('modalImg').innerHTML = p.image ? `<img src="${p.image}" style="max-height:240px; object-fit:contain; border-radius:12px">` : `<span style="font-size:80px">${p.emoji}</span>`;
@@ -825,35 +1180,36 @@
       document.body.style.overflow = 'hidden';
     }
 
-    function closeModal() {
+    window.closeModal = function() {
       document.getElementById('productModal').classList.remove('active');
       document.body.style.overflow = '';
     }
 
-    function changeQty(delta) {
+    window.changeQty = function(delta) {
       const el = document.getElementById('qtyVal');
       el.textContent = Math.max(1, parseInt(el.textContent) + delta);
     }
 
-    function toggleCart() {
+    window.toggleCart = function() {
       document.getElementById('cartDrawer').classList.toggle('active');
       document.getElementById('cartOverlay').classList.toggle('active');
     }
 
-    function addToCart(id, qty = 1) {
+    window.addToCart = function(id, qty = 1) {
       const product = products.find(p => p.id === id);
       const existing = cart.find(item => item.id === id);
       if (existing) existing.qty += qty;
       else cart.push({ ...product, qty });
-      saveCart(); updateCartUI(); toggleCart();
+      saveCart(); updateCartUI(); 
+      if(!document.getElementById('cartDrawer').classList.contains('active')) toggleCart();
     }
 
-    function addToCartFromModal() {
+    window.addToCartFromModal = function() {
       addToCart(currentProduct.id, parseInt(document.getElementById('qtyVal').textContent));
       closeModal();
     }
 
-    function whatsappOrder() {
+    window.whatsappOrder = function() {
       const qty = document.getElementById('qtyVal').textContent;
       const msg = encodeURIComponent(`Hi Shyan Health! I'd like to order ${qty} x ${currentProduct.name}.`);
       window.open(`https://wa.me/918802916080?text=${msg}`, '_blank');
@@ -871,9 +1227,9 @@
       else list.innerHTML = cart.map(item => `<div class="cart-item"><img src="${item.image || ''}" class="cart-item-img"><div><b>${item.name}</b><br>₹${item.price} x ${item.qty}</div><button onclick="removeFromCart(${item.id})" style="margin-left:auto; background:none; border:none; cursor:pointer">✕</button></div>`).join('');
     }
 
-    function removeFromCart(id) { cart = cart.filter(i => i.id !== id); saveCart(); updateCartUI(); }
+    window.removeFromCart = function(id) { cart = cart.filter(i => i.id !== id); saveCart(); updateCartUI(); }
 
-    function filterProducts() {
+    window.filterProducts = function() {
       const q = document.getElementById('searchInput').value.toLowerCase();
       const sort = document.getElementById('sortSelect').value;
       const selectedCats = Array.from(document.querySelectorAll('#categoryFilters input:checked')).map(cb => cb.value);
@@ -885,9 +1241,231 @@
 
     document.getElementById('productModal').addEventListener('click', function(e) { if(e.target === this) closeModal(); });
 
+    // ─── CHECKOUT LOGIC ───
+    window.selectPayment = function(mode, el) {
+      selectedPaymentMode = mode;
+      document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('active'));
+      el.classList.add('active');
+      updateSummary();
+    };
+
+    function updateSummary() {
+      const total = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+      const toPay = selectedPaymentMode === 'prepaid' ? total : 299;
+      
+      document.getElementById('summaryTotal').textContent = `₹${total.toLocaleString()}`;
+      document.getElementById('summaryToPay').textContent = `₹${toPay.toLocaleString()}`;
+    }
+
+    window.openCheckout = function() {
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+      
+      const total = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+      const itemsList = cart.map(item => `• ${item.name} (x${item.qty}) - ₹${(item.price * item.qty).toLocaleString()}`).join('\n');
+      
+      let customerName = localStorage.getItem('shyan_user_name') || "";
+      let intro = customerName ? `Hi Shyan Health! My name is ${customerName}.` : `Hi Shyan Health!`;
+      
+      const msg = encodeURIComponent(`${intro}\n\nI'd like to place an order for:\n${itemsList}\n\n*Total Amount: ₹${total.toLocaleString()}*\n\nPlease confirm my order and let me know the next steps for delivery.`);
+      
+      window.open(`https://wa.me/918802916080?text=${msg}`, '_blank');
+    };
+
+    window.sendLoginOTP = async function() {
+      const name = document.getElementById('loginName').value;
+      const phone = document.getElementById('loginPhone').value;
+
+      if (!name || phone.length !== 10) {
+        alert("Please enter your name and 10-digit phone number.");
+        return;
+      }
+
+      const fullPhone = "+91" + phone;
+      document.getElementById('loginSpinner').style.display = 'block';
+
+      try {
+        const appVerifier = window.recaptchaVerifier;
+        confirmationResult = await signInWithPhoneNumber(auth, fullPhone, appVerifier);
+        
+        localStorage.setItem('shyan_user_name', name);
+        document.getElementById('displayPhone').textContent = fullPhone;
+        document.getElementById('stepLogin').classList.remove('active');
+        document.getElementById('stepOTP').classList.add('active');
+      } catch (error) {
+        console.error("SMS Error:", error);
+        alert("Error sending SMS: " + error.message);
+      } finally {
+        document.getElementById('loginSpinner').style.display = 'none';
+      }
+    };
+
+    window.verifyLoginOTP = async function() {
+      const otp = Array.from({length: 6}, (_, i) => document.getElementById(`otp${i+1}`).value).join('');
+      if (otp.length !== 6) {
+        alert("Please enter 6-digit OTP");
+        return;
+      }
+
+      document.getElementById('verifySpinner').style.display = 'block';
+
+      try {
+        const result = await confirmationResult.confirm(otp);
+        currentUser = result.user;
+        
+        document.getElementById('custName').value = localStorage.getItem('shyan_user_name');
+        document.getElementById('custPhone').value = document.getElementById('loginPhone').value;
+        
+        document.getElementById('stepOTP').classList.remove('active');
+        document.getElementById('stepInfo').classList.add('active');
+      } catch (error) {
+        console.error("OTP Error:", error);
+        alert("Invalid OTP. Please try again.");
+      } finally {
+        document.getElementById('verifySpinner').style.display = 'none';
+      }
+    };
+
+    window.handleLogout = async function() {
+      if (confirm("Are you sure you want to logout?")) {
+        try {
+          await auth.signOut();
+          localStorage.removeItem('shyan_user_name');
+          currentUser = null;
+          location.reload(); // Refresh to clear state
+        } catch (e) {
+          console.error("Logout Error:", e);
+        }
+      }
+    };
+
+    window.resetToLogin = function() {
+      document.getElementById('stepLogin').classList.add('active');
+      document.getElementById('stepOTP').classList.remove('active');
+    };
+
+    window.handlePaymentAndOrder = async function() {
+      const name = document.getElementById('custName').value;
+      const phone = document.getElementById('custPhone').value;
+      const address = document.getElementById('custAddress').value;
+      const city = document.getElementById('custCity').value;
+      const pin = document.getElementById('custPin').value;
+
+      if (!name || phone.length !== 10 || !address || !city || pin.length !== 6) {
+        alert("Please fill all details correctly.");
+        return;
+      }
+
+      const total = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+      const toPayNow = selectedPaymentMode === 'prepaid' ? total : 299;
+
+      document.getElementById('paySpinner').style.display = 'block';
+
+      if (window.Razorpay) {
+        const options = {
+          "key": "YOUR_RAZORPAY_KEY", 
+          "amount": toPayNow * 100,
+          "currency": "INR",
+          "name": "Shyan Health",
+          "description": "Payment for order",
+          "handler": async function (response) {
+            await finalizeOrder(response.razorpay_payment_id);
+          },
+          "prefill": {
+            "name": name,
+            "contact": phone
+          },
+          "theme": { "color": "#1A3D2B" }
+        };
+        const rzp = new window.Razorpay(options);
+        rzp.open();
+        document.getElementById('paySpinner').style.display = 'none';
+      } else {
+        setTimeout(async () => {
+          await finalizeOrder("mock_pay_id_" + Date.now());
+          document.getElementById('paySpinner').style.display = 'none';
+        }, 1500);
+      }
+    };
+
+    async function finalizeOrder(paymentId) {
+      const orderData = {
+        userId: currentUser ? currentUser.uid : 'guest',
+        customerName: document.getElementById('custName').value,
+        phone: "+91" + document.getElementById('custPhone').value,
+        address: document.getElementById('custAddress').value,
+        city: document.getElementById('custCity').value,
+        pincode: document.getElementById('custPin').value,
+        paymentMode: selectedPaymentMode,
+        paymentId: paymentId,
+        items: cart,
+        totalAmount: cart.reduce((acc, i) => acc + (i.price * i.qty), 0),
+        amountPaid: selectedPaymentMode === 'prepaid' ? cart.reduce((acc, i) => acc + (i.price * i.qty), 0) : 299,
+        status: 'paid',
+        createdAt: serverTimestamp()
+      };
+
+      try {
+        // Save Order
+        await addDoc(collection(db, "orders"), orderData);
+
+        // Save/Update Customer Info
+        if (currentUser) {
+          const customerData = {
+            name: orderData.customerName,
+            phone: orderData.phone,
+            address: orderData.address,
+            city: orderData.city,
+            pincode: orderData.pincode,
+            lastOrderDate: serverTimestamp(),
+            uid: currentUser.uid
+          };
+          await setDoc(doc(db, "customers", currentUser.uid), customerData, { merge: true });
+        }
+
+        document.getElementById('stepInfo').classList.remove('active');
+        document.getElementById('stepSuccess').classList.add('active');
+      } catch (e) {
+        console.error("Error saving order:", e);
+        alert("Order placed but error saving details. Please contact support.");
+      }
+    }
+
+    window.closeCheckout = function(isSuccess = false) {
+      document.getElementById('checkoutModal').classList.remove('active');
+      document.body.style.overflow = '';
+      if (isSuccess === true) {
+        cart = [];
+        saveCart();
+        updateCartUI();
+        resetSteps();
+      }
+    };
+
+    window.resetSteps = function() {
+      if (currentUser) {
+        document.getElementById('stepLogin').classList.remove('active');
+        document.getElementById('stepOTP').classList.remove('active');
+        document.getElementById('stepInfo').classList.add('active');
+      } else {
+        document.getElementById('stepLogin').classList.add('active');
+        document.getElementById('stepOTP').classList.remove('active');
+        document.getElementById('stepInfo').classList.remove('active');
+      }
+      document.getElementById('stepSuccess').classList.remove('active');
+    };
+
+    window.moveOTPFocus = function(current, nextId) {
+      if (current.value.length === 1) {
+        document.getElementById(nextId).focus();
+      }
+    };
+
     renderProducts(products);
     updateCartUI();
   </script>
 </body>
-</html> 
- 
+
+</html>

@@ -4115,10 +4115,13 @@
 
     function openCheckout() {
       if (cart.length === 0) return alert("Your basket is empty!");
-      toggleCart();
-      document.getElementById('checkoutDrawer').classList.add('active');
-      document.getElementById('cartOverlay').classList.add('active');
-      updatePaymentSummary();
+      const total = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+      const itemsList = cart.map(item => `• ${item.name} (x${item.qty}) - ₹${(item.price * item.qty).toLocaleString()}`).join('\n');
+      const msg = encodeURIComponent(`Hi Shyan Health!\n\nI'd like to place an order for:\n${itemsList}\n\n*Total Amount: ₹${total.toLocaleString()}*\n\nPlease confirm my order and let me know the next steps for delivery.`);
+      window.open(`https://wa.me/918802916080?text=${msg}`, '_blank');
+
+
+
     }
 
     function closeCheckout() {
@@ -4238,6 +4241,7 @@
 
     function calculateBMI() {
       const heightCm = parseFloat(document.getElementById('bmiHeight').value);
+      const goal = document.getElementById('bmiGoal').value;
       const weightKg = parseFloat(document.getElementById('bmiWeight').value);
 
       if (!heightCm || !weightKg) {
@@ -4276,12 +4280,19 @@
 
     function confirmOnWhatsAppBMI() {
       const name = document.getElementById('bmiName').value || 'Customer';
+      const age = document.getElementById('bmiAge').value || 'N/A';
+      const gender = document.getElementById('bmiGender').value || 'N/A';
+      const phone = document.getElementById('bmiPhone').value || 'N/A';
+      const height = document.getElementById('bmiHeight').value || '0';
+      const weight = document.getElementById('bmiWeight').value || '0';
       const bmi = document.getElementById('bmiDisplay').textContent;
       const cat = document.getElementById('bmiCatDisplay').textContent;
       const goal = document.getElementById('bmiGoal').value;
       const phone = document.getElementById('bmiPhone').value;
 
-      const msg = encodeURIComponent(`Hi Shyan Health! I just calculated my BMI:\n\n👤 Name: ${name}\n🔢 BMI: ${bmi}\n📊 Category: ${cat}\n🎯 Goal: ${goal}\n📞 Phone: ${phone}\n\nI'd like a free consultation based on my result.`);
+      const report = `*🧘 SHYAN HEALTH - WELLNESS REPORT 🧘*\n---------------------------------------\n👤 *Patient Profile:*\n• Name: ${name}\n• Age: ${age} | Gender: ${gender}\n• Contact: ${phone}\n\n📊 *Health Vitals:*\n• Height: ${height} cm\n• Weight: ${weight} kg\n• *BMI Score: ${bmi}*\n• *Status: ${cat}*\n\n🎯 *Goals & Lifestyle:*\n• Primary Goal: ${goal}\n• Activity Level: ${activity}\n\n💡 *Ayurvedic Expert Advice:*\n"${advice}"\n\n---------------------------------------\nHi Shyan Health! I've just generated my health report. I'd like to get a *Customized Diet Plan* and consultation based on these results. Please guide me on the next steps!`;
+
+      const msg = encodeURIComponent(report);
       window.open(`https://wa.me/918802916080?text=${msg}`, '_blank');
     }
 
