@@ -4115,10 +4115,10 @@
 
     function openCheckout() {
       if (cart.length === 0) return alert("Your basket is empty!");
-      toggleCart();
-      document.getElementById('checkoutDrawer').classList.add('active');
-      document.getElementById('cartOverlay').classList.add('active');
-      updatePaymentSummary();
+      const total = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+      const itemsList = cart.map(item => `• ${item.name} (x${item.qty}) - ₹${(item.price * item.qty).toLocaleString()}`).join('\n');
+      const msg = encodeURIComponent(`Hi Shyan Health!\n\nI'd like to place an order for:\n${itemsList}\n\n*Total Amount: ₹${total.toLocaleString()}*\n\nPlease confirm my order and let me know the next steps for delivery.`);
+      window.open(`https://wa.me/918802916080?text=${msg}`, '_blank');
     }
 
     function closeCheckout() {

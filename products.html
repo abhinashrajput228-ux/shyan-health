@@ -740,7 +740,7 @@
         <span>Total Amount</span>
         <span id="cartTotalValue">₹0</span>
       </div>
-      <button class="btn-checkout" onclick="alert('Checkout integration coming soon!')">Proceed to Checkout 💳</button>
+      <button class="btn-checkout" onclick="openCheckout()">Proceed to Checkout 💳</button>
     </div>
   </div>
 
@@ -872,6 +872,14 @@
     }
 
     function removeFromCart(id) { cart = cart.filter(i => i.id !== id); saveCart(); updateCartUI(); }
+
+    function openCheckout() {
+      if (cart.length === 0) return alert("Your basket is empty!");
+      const total = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+      const itemsList = cart.map(item => `• ${item.name} (x${item.qty}) - ₹${(item.price * item.qty).toLocaleString()}`).join('\n');
+      const msg = encodeURIComponent(`Hi Shyan Health!\n\nI'd like to place an order for:\n${itemsList}\n\n*Total Amount: ₹${total.toLocaleString()}*\n\nPlease confirm my order and let me know the next steps for delivery.`);
+      window.open(`https://wa.me/918802916080?text=${msg}`, '_blank');
+    }
 
     function filterProducts() {
       const q = document.getElementById('searchInput').value.toLowerCase();
