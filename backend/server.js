@@ -32,6 +32,7 @@ app.use('/api/admin', require('./routes/adminRoutes'));
 app.use('/api/contact', require('./routes/contactRoutes'));
 app.use('/api/leads', require('./routes/leadRoutes'));
 app.use('/api/upload', require('./routes/uploadRoutes')); // Photo upload → Cloudinary
+app.use('/api/meta', require('./routes/metaRoutes')); // Meta Conversions API
 
 // Root Route
 app.get('/', (req, res) => {

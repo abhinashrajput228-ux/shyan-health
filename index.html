@@ -4218,13 +4218,21 @@
       const itemsList = cart.map(item => `• ${item.name} (x${item.qty}) - ₹${(item.price * item.qty).toLocaleString()}`).join('\n');
       const msg = encodeURIComponent(`Hi Shyan Health!\n\nI'd like to place an order for:\n${itemsList}\n\n*Total Amount: ₹${total.toLocaleString()}*\n\nPlease confirm my order and let me know the next steps for delivery.`);
       
-      // Meta Pixel Purchase Tracking
+      // 1. Meta Pixel (Browser)
       if (typeof fbq !== 'undefined') {
-        fbq('track', 'Purchase', {
-          value: total,
-          currency: 'INR'
-        });
+        fbq('track', 'Purchase', { value: total, currency: 'INR' });
       }
+
+      // 2. Meta Conversions API (Server-side)
+      fetch('/api/meta/track-purchase', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          value: total,
+          currency: 'INR',
+          orderId: 'ORDER_' + Date.now()
+        })
+      }).catch(err => console.error('CAPI Error:', err));
 
       window.open(`https://wa.me/918802916080?text=${msg}`, '_blank');
     }
