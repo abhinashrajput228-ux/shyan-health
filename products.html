@@ -6,13 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <title>All Products | Shyan Health – Fat to Fit</title>
-  <meta name="description" content="Explore our full range of premium Ayurvedic weight management and wellness products for women. Natural, safe, and effective.">
-  
+  <meta name="description"
+    content="Explore our full range of premium Ayurvedic weight management and wellness products for women. Natural, safe, and effective.">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&family=Outfit:wght@400;600;700&display=swap"
+    rel="stylesheet">
   <script src="https://checkout.razorpay.com/v1/checkout.js" async></script>
-  
+
   <style>
     :root {
       --saffron: #E8A820;
@@ -327,8 +330,8 @@
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       pointer-events: none;
       z-index: 10;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-      border: 1px solid rgba(255,255,255,0.15);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
 
     .product-card:hover .usage-popup {
@@ -359,9 +362,20 @@
       text-transform: uppercase;
     }
 
-    .badge-best { background: var(--saffron); color: var(--deep-green); }
-    .badge-new { background: var(--deep-green); color: white; }
-    .badge-sale { background: var(--rose); color: white; }
+    .badge-best {
+      background: var(--saffron);
+      color: var(--deep-green);
+    }
+
+    .badge-new {
+      background: var(--deep-green);
+      color: white;
+    }
+
+    .badge-sale {
+      background: var(--rose);
+      color: white;
+    }
 
     .product-card-body {
       padding: 24px;
@@ -394,7 +408,9 @@
       font-size: 13px;
     }
 
-    .stars { color: var(--saffron); }
+    .stars {
+      color: var(--saffron);
+    }
 
     .product-footer {
       margin-top: auto;
@@ -488,13 +504,15 @@
       height: 100%;
       background: white;
       z-index: 4000;
-      box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
       transition: right 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
       display: flex;
       flex-direction: column;
     }
 
-    .cart-drawer.active { right: 0; }
+    .cart-drawer.active {
+      right: 0;
+    }
 
     .cart-overlay {
       position: fixed;
@@ -507,7 +525,10 @@
       transition: all 0.4s;
     }
 
-    .cart-overlay.active { opacity: 1; visibility: visible; }
+    .cart-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
 
     .cart-header {
       padding: 30px;
@@ -582,10 +603,19 @@
     }
 
     @media (max-width: 1024px) {
-      .main-container { grid-template-columns: 1fr; }
-      .sidebar { display: none; }
+      .main-container {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: none;
+      }
     }
-    .badge-launching { background: #9E9E9E; color: white; }
+
+    .badge-launching {
+      background: #9E9E9E;
+      color: white;
+    }
   </style>
 </head>
 
@@ -677,7 +707,8 @@
     <section class="content-area">
       <div class="results-bar">
         <div class="search-box">
-          <input type="text" class="search-input" placeholder="Search products..." id="searchInput" onkeyup="filterProducts()">
+          <input type="text" class="search-input" placeholder="Search products..." id="searchInput"
+            onkeyup="filterProducts()">
           <span class="search-icon">🔍</span>
         </div>
         <div class="sort-box">
@@ -749,22 +780,29 @@
     <div class="modal">
       <button class="modal-close" onclick="closeModal()">✕</button>
       <div id="modalImg" style="text-align:center"></div>
-      <h3 id="modalName" style="font-family:'Playfair Display', serif; font-size:24px; color:var(--deep-green); margin:20px 0 10px"></h3>
+      <h3 id="modalName"
+        style="font-family:'Playfair Display', serif; font-size:24px; color:var(--deep-green); margin:20px 0 10px"></h3>
       <p id="modalDesc" style="font-size:14px; color:var(--text-light); line-height:1.6; margin-bottom:20px"></p>
       <div id="modalPrice" style="font-size:24px; font-weight:700; color:var(--deep-green); margin-bottom:20px"></div>
-      
+
       <div style="display:flex; align-items:center; gap:15px; margin-bottom:20px">
         <span>Quantity:</span>
         <div style="display:flex; border:1px solid var(--border); border-radius:50px; overflow:hidden">
-          <button onclick="changeQty(-1)" style="padding:10px 15px; border:none; background:none; cursor:pointer">−</button>
+          <button onclick="changeQty(-1)"
+            style="padding:10px 15px; border:none; background:none; cursor:pointer">−</button>
           <span id="qtyVal" style="padding:10px 15px; font-weight:700">1</span>
-          <button onclick="changeQty(1)" style="padding:10px 15px; border:none; background:none; cursor:pointer">+</button>
+          <button onclick="changeQty(1)"
+            style="padding:10px 15px; border:none; background:none; cursor:pointer">+</button>
         </div>
       </div>
-      
+
       <div style="display:flex; gap:15px">
-        <button onclick="addToCartFromModal()" style="flex:1; background:var(--deep-green); color:white; border:none; padding:16px; border-radius:50px; font-weight:700; cursor:pointer">Add to Cart 🛒</button>
-        <button onclick="whatsappOrder()" style="flex:1; background:var(--forest); color:white; border:none; padding:16px; border-radius:50px; font-weight:700; cursor:pointer">WhatsApp 💬</button>
+        <button onclick="addToCartFromModal()"
+          style="flex:1; background:var(--deep-green); color:white; border:none; padding:16px; border-radius:50px; font-weight:700; cursor:pointer">Add
+          to Cart 🛒</button>
+        <button onclick="whatsappOrder()"
+          style="flex:1; background:var(--forest); color:white; border:none; padding:16px; border-radius:50px; font-weight:700; cursor:pointer">WhatsApp
+          💬</button>
       </div>
     </div>
   </div>
@@ -878,6 +916,15 @@
       const total = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
       const itemsList = cart.map(item => `• ${item.name} (x${item.qty}) - ₹${(item.price * item.qty).toLocaleString()}`).join('\n');
       const msg = encodeURIComponent(`Hi Shyan Health!\n\nI'd like to place an order for:\n${itemsList}\n\n*Total Amount: ₹${total.toLocaleString()}*\n\nPlease confirm my order and let me know the next steps for delivery.`);
+      
+      // Meta Pixel Purchase Tracking
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'Purchase', {
+          value: total,
+          currency: 'INR'
+        });
+      }
+
       window.open(`https://wa.me/918802916080?text=${msg}`, '_blank');
     }
 
@@ -886,16 +933,19 @@
       const sort = document.getElementById('sortSelect').value;
       const selectedCats = Array.from(document.querySelectorAll('#categoryFilters input:checked')).map(cb => cb.value);
       let f = products.filter(p => p.name.toLowerCase().includes(q) && (selectedCats.length === 0 || selectedCats.includes(p.cat)));
-      if (sort === 'price-low') f.sort((a,b) => a.price - b.price);
-      else if (sort === 'price-high') f.sort((a,b) => b.price - a.price);
+      if (sort === 'price-low') f.sort((a, b) => a.price - b.price);
+      else if (sort === 'price-high') f.sort((a, b) => b.price - a.price);
       renderProducts(f);
     }
 
-    document.getElementById('productModal').addEventListener('click', function(e) { if(e.target === this) closeModal(); });
+    document.getElementById('productModal').addEventListener('click', function (e) { if (e.target === this) closeModal(); });
 
     renderProducts(products);
     updateCartUI();
   </script>
 </body>
-</html> 
+
+</html>
+
+ 
  
